@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Услуги и цены - Автосервис{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Услуги и цены</h1>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="services-list">
+            <div class="service-item">
+                <h3>Диагностика</h3>
+                <p>Комплексная компьютерная диагностика всех систем автомобиля</p>
+                <p class="price">от 1 500 ₽</p>
+            </div>
+            
+            <div class="service-item">
+                <h3>Замена масла</h3>
+                <p>Замена моторного масла и масляного фильтра</p>
+                <p class="price">от 800 ₽</p>
+            </div>
+            
+            <div class="service-item">
+                <h3>Ремонт двигателя</h3>
+                <p>Капитальный и текущий ремонт двигателя</p>
+                <p class="price">от 5 000 ₽</p>
+            </div>
+            
+            <div class="service-item">
+                <h3>Ремонт подвески</h3>
+                <p>Диагностика и ремонт элементов подвески</p>
+                <p class="price">от 2 000 ₽</p>
+            </div>
+            
+            <div class="service-item">
+                <h3>Шиномонтаж</h3>
+                <p>Монтаж/демонтаж шин, балансировка колес</p>
+                <p class="price">от 500 ₽</p>
+            </div>
+            
+            <div class="service-item">
+                <h3>Ремонт тормозной системы</h3>
+                <p>Замена колодок, дисков, тормозной жидкости</p>
+                <p class="price">от 1 500 ₽</p>
+            </div>
+        </div>
+        
+        <div class="text-center" style="margin-top: 2rem;">
+            <p><strong>Точную стоимость работ можно узнать после диагностики</strong></p>
+            <a href="{% url 'website:estimate_request' %}" class="btn btn-primary">Запросить расчёт</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Заявка принята - Автосервис{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Спасибо!</h1>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="success-message">
+            <h2>Ваша заявка принята</h2>
+            <p>Мы свяжемся с вами в ближайшее время для уточнения деталей.</p>
+            <a href="{% url 'website:index' %}" class="btn btn-primary">Вернуться на главную</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

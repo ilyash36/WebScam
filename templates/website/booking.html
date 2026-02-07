@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}Записаться на обслуживание - Автосервис{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Записаться на обслуживание</h1>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="form-wrapper">
+            <form method="post" class="booking-form">
+                {% csrf_token %}
+                
+                <h2>Ваши данные</h2>
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                        <div class="error">{{ form.first_name.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                        <div class="error">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }} *</label>
+                    {{ form.phone }}
+                    {% if form.phone.errors %}
+                        <div class="error">{{ form.phone.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="error">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <h2>Данные автомобиля</h2>
+                <div class="form-group">
+                    <label for="{{ form.vehicle_brand.id_for_label }}">{{ form.vehicle_brand.label }} *</label>
+                    {{ form.vehicle_brand }}
+                    {% if form.vehicle_brand.errors %}
+                        <div class="error">{{ form.vehicle_brand.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.vehicle_model.id_for_label }}">{{ form.vehicle_model.label }} *</label>
+                    {{ form.vehicle_model }}
+                    {% if form.vehicle_model.errors %}
+                        <div class="error">{{ form.vehicle_model.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.vehicle_year.id_for_label }}">{{ form.vehicle_year.label }}</label>
+                        {{ form.vehicle_year }}
+                        {% if form.vehicle_year.errors %}
+                            <div class="error">{{ form.vehicle_year.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.vehicle_license_plate.id_for_label }}">{{ form.vehicle_license_plate.label }}</label>
+                        {{ form.vehicle_license_plate }}
+                        {% if form.vehicle_license_plate.errors %}
+                            <div class="error">{{ form.vehicle_license_plate.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.message.id_for_label }}">{{ form.message.label }}</label>
+                    {{ form.message }}
+                    {% if form.message.errors %}
+                        <div class="error">{{ form.message.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <h2>Согласия</h2>
+                <div class="form-group checkbox-group">
+                    {{ form.consent_sms }}
+                    <label for="{{ form.consent_sms.id_for_label }}">{{ form.consent_sms.label }}</label>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    {{ form.consent_email }}
+                    <label for="{{ form.consent_email.id_for_label }}">{{ form.consent_email.label }}</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-large">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

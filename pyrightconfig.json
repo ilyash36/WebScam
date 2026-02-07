@@ -1,0 +1,24 @@
+{
+    "include": [
+        "apps",
+        "config"
+    ],
+    "exclude": [
+        "**/__pycache__",
+        "**/migrations",
+        "**/node_modules",
+        ".venv",
+        "venv",
+        "env",
+        "ENV"
+    ],
+    "pythonVersion": "3.11",
+    "pythonPlatform": "Windows",
+    "typeCheckingMode": "basic",
+    "reportMissingImports": true,
+    "reportMissingTypeStubs": false,
+    "reportUnusedImport": true,
+    "reportUnusedClass": true,
+    "reportUnusedFunction": true,
+    "reportUnusedVariable": true
+}

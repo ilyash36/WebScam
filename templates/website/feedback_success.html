@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Сообщение отправлено - Автосервис{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Спасибо!</h1>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="success-message">
+            <h2>Ваше сообщение отправлено</h2>
+            <p>Мы свяжемся с вами в ближайшее время.</p>
+            <a href="{% url 'website:index' %}" class="btn btn-primary">Вернуться на главную</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

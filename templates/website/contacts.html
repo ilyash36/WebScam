@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Контакты - Автосервис{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Контакты</h1>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="contacts-grid">
+            <div class="contact-info">
+                <h2>Наши контакты</h2>
+                <div class="contact-item">
+                    <h3>Телефон</h3>
+                    <p>+7 (999) 123-45-67</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Email</h3>
+                    <p>info@autoservice.ru</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Адрес</h3>
+                    <p>г. Москва, ул. Примерная, д. 1</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Режим работы</h3>
+                    <p>Пн-Пт: 9:00 - 20:00</p>
+                    <p>Сб-Вс: 10:00 - 18:00</p>
+                </div>
+            </div>
+            
+            <div class="contact-form-wrapper">
+                <h2>Напишите нам</h2>
+                <a href="{% url 'website:feedback' %}" class="btn btn-primary">Форма обратной связи</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

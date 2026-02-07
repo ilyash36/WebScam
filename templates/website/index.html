@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Автосервис{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Профессиональный автосервис</h1>
+        <p>Качественный ремонт и обслуживание вашего автомобиля</p>
+        <a href="{% url 'website:booking' %}" class="btn btn-primary btn-large">Записаться на обслуживание</a>
+    </div>
+</section>
+
+<section class="services-preview">
+    <div class="container">
+        <h2>Наши услуги</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Диагностика</h3>
+                <p>Комплексная диагностика всех систем автомобиля</p>
+            </div>
+            <div class="service-card">
+                <h3>Ремонт двигателя</h3>
+                <p>Качественный ремонт и обслуживание двигателя</p>
+            </div>
+            <div class="service-card">
+                <h3>Замена масла</h3>
+                <p>Быстрая замена масла и фильтров</p>
+            </div>
+            <div class="service-card">
+                <h3>Шиномонтаж</h3>
+                <p>Профессиональный шиномонтаж и балансировка</p>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="{% url 'website:services' %}" class="btn btn-secondary">Все услуги</a>
+        </div>
+    </div>
+</section>
+
+<section class="advantages">
+    <div class="container">
+        <h2>Почему выбирают нас</h2>
+        <div class="advantages-grid">
+            <div class="advantage-item">
+                <h3>Опытные мастера</h3>
+                <p>Работают только профессионалы с большим опытом</p>
+            </div>
+            <div class="advantage-item">
+                <h3>Гарантия качества</h3>
+                <p>Гарантия на все виды работ и запчасти</p>
+            </div>
+            <div class="advantage-item">
+                <h3>Прозрачные цены</h3>
+                <p>Честные цены без скрытых доплат</p>
+            </div>
+            <div class="advantage-item">
+                <h3>Быстрое обслуживание</h3>
+                <p>Минимальное время ожидания</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="container">
+        <h2>Готовы записаться?</h2>
+        <p>Оставьте заявку и мы свяжемся с вами в ближайшее время</p>
+        <a href="{% url 'website:booking' %}" class="btn btn-primary btn-large">Записаться сейчас</a>
+    </div>
+</section>
+{% endblock %}
