@@ -26,9 +26,14 @@ RUN pip install --upgrade pip && \
 COPY requirements-dev.txt .
 RUN pip install -r requirements-dev.txt || true
 
+# Устанавливаем netcat для проверки БД (в dev образе)
+RUN apt-get update && apt-get install -y netcat-openbsd dos2unix && \
+    rm -rf /var/lib/apt/lists/*
+
 # Копируем скрипт входа
 COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+RUN dos2unix /docker-entrypoint.sh && \
+    chmod +x /docker-entrypoint.sh
 
 # Копируем проект
 COPY . .
@@ -36,13 +41,10 @@ COPY . .
 # Создаем директории
 RUN mkdir -p /app/staticfiles /app/media /app/logs
 
-# Устанавливаем netcat для проверки БД (в dev образе)
-RUN apt-get update && apt-get install -y netcat-openbsd && \
-    rm -rf /var/lib/apt/lists/*
-
 # Создаем пользователя
 RUN useradd -m -u 1000 appuser && \
-    chown -R appuser:appuser /app
+    chown -R appuser:appuser /app && \
+    chown appuser:appuser /docker-entrypoint.sh
 
 # Открываем порт
 EXPOSE 8000
