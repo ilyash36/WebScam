@@ -77,6 +77,10 @@ class BookingForm(forms.ModelForm):
         self.fields['phone'].required = True
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
+        # Переопределяем сообщение об ошибке уникальности
+        self.fields['phone'].error_messages['unique'] = (
+            'Клиент с таким телефоном уже существует.'
+        )
 
 
 class FeedbackForm(forms.Form):
