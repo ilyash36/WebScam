@@ -133,3 +133,7 @@ docker-compose up --build
 docker-compose logs web
 docker-compose logs db
 ```
+
+### Windows: ошибка «exec /docker-entrypoint.sh: no such file or directory»
+
+На Windows скрипт `docker-entrypoint.sh` может иметь окончания строк CRLF. В `Dockerfile.dev` используется `dos2unix` для преобразования в Unix-формат (LF) при сборке образа. Убедитесь, что образ пересобран: `docker-compose -f docker-compose.dev.yml up --build -d`.

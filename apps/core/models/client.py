@@ -34,6 +34,9 @@ class Client(BaseModel):
         validators=[phone_validator],
         verbose_name="Телефон",
         help_text="Формат: +79991234567",
+        error_messages={
+            'unique': 'Клиент с таким телефоном уже существует.',
+        },
     )
     email = models.EmailField(
         blank=True,
