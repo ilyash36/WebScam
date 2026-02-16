@@ -322,7 +322,8 @@ python manage.py migrate app_name previous_migration_name
 - **Шрифты**: `static/css/fonts.css` — KOT-Eitai Gothic Bold, Century Old Style Std, Goudy Old Style, DwarvenStonecraftCyrExtended
 - **Скругления**: эллиптические (кривые Безье) через `--radius-bezier-sm/md/lg`
 - **Контакты**: Телефон +7 (950) 757-06-06 — ссылка на t.me/+79507570606; адрес Воронеж, Кривошеина 7а — ссылка на Яндекс.Карты
-- **Футер**: «Compose & Code by 1nowen» — ссылка на 1nowen.com; анимация загрузки при первом визите (`static/js/loader.js`)
+- **Футер**: «Compose & Code by 1nowen» — ссылка на 1nowen.com; анимация загрузки 1,5 с при первом визите (`static/js/loader.js`)
+- **Страница «Услуги»**: текст о принципе технической диагностики в карточке; выравнивание по ширине; жирные акценты на ключевых фразах
 
 ### Структура шаблонов
 

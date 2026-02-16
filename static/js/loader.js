@@ -6,7 +6,7 @@
 (function () {
     'use strict';
 
-    const LOADER_MIN_DURATION = 600;
+    const LOADER_MIN_DURATION = 1500;
     const LOADER_MAX_WAIT = 2500;
 
     const loader = document.getElementById('pageLoader');

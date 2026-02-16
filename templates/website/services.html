@@ -1,30 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}Услуги и цены - Автосервис{% endblock %}
+{% block title %}Услуги - Автосервис{% endblock %}
 
 {% block content %}
 <section class="page-header">
     <div class="container">
-        <h1>Услуги и цены</h1>
+        <h1>Услуги</h1>
     </div>
 </section>
 
 <section class="content-section">
     <div class="container">
         <div class="services-list">
-            <div class="service-item">
-                <h3>Диагностика</h3>
-            </div>
-            <div class="service-item">
-                <h3>Техническое обслуживание</h3>
-            </div>
-            <div class="service-item">
-                <h3>Ремонт узлов и агрегатов</h3>
+            <div class="service-item service-item--text">
+                <p>Мы выполняем все виды работ по автомеханике. В основе нашего труда заложен <strong>принцип технической диагностики</strong>. Он заключается в точном определении неисправного состояния, причин поломки и выборе эффективного метода устранения до начала непосредственного ремонта автомобиля. Это позволяет проводить обслуживание на основе фактического состояния, <strong>избегая ненужных замен, снижая расходы клиента и время труда мастера, но повышая качество работ.</strong></p>
             </div>
         </div>
-        
-        <div class="text-center" style="margin-top: 2rem;">
-            <p><strong>Точную стоимость работ можно узнать после диагностики</strong></p>
+
+        <div class="services-cta text-center">
+            <p class="services-cta__text">Точную стоимость работ можно узнать после диагностики</p>
             <a href="{% url 'website:booking' %}" class="btn btn-primary">Записаться</a>
         </div>
     </div>

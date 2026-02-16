@@ -364,6 +364,32 @@ header {
     margin-top: 0.5rem;
 }
 
+.service-item--text {
+    display: block;
+    align-items: stretch;
+    justify-content: flex-start;
+    min-height: auto;
+    text-align: justify;
+}
+
+.service-item--text p {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--color-black);
+}
+
+.services-cta {
+    margin-top: 2rem;
+}
+
+.services-cta__text {
+    font-family: "KOT-Eitai Gothic Bold", "Century Old Style Std", sans-serif;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    color: var(--color-black);
+}
+
 /* Contacts */
 .contacts-grid {
     display: grid;
