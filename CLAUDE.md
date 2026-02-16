@@ -304,12 +304,19 @@ python manage.py migrate app_name previous_migration_name
 2. **Формы**:
    - Форма записи на обслуживание
    - Форма обратной связи
-   - Форма заявки на расчёт
+   - Форма записи на приём (estimate)
 
 3. **Базовый личный кабинет** (заглушки):
    - Страница входа/регистрации
    - Профиль клиента
    - История обращений (пока пусто)
+
+### Дизайн (Chernyavskiy A-Tech)
+
+- **Бренд**: Chernyavskiy A-Tech
+- **Палитра**: чёрный (#0a0a0a), золотой (#d4af37), белый
+- **Шрифты**: `static/css/fonts.css` — KOT-Eitai Gothic Bold, Century Old Style Std, Goudy Old Style, DwarvenStonecraftCyrExtended
+- **Скругления**: эллиптические (кривые Безье) через `--radius-bezier-sm/md/lg`
 
 ### Структура шаблонов
 
@@ -322,7 +329,8 @@ templates/
 │   ├── services.html      # Услуги
 │   ├── contacts.html      # Контакты
 │   ├── booking.html       # Форма записи
-│   └── feedback.html      # Форма обратной связи
+│   ├── feedback.html      # Форма обратной связи
+│   └── estimate_request.html  # Запись на приём
 └── accounts/
     ├── login.html
     ├── register.html

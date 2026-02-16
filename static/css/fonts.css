@@ -1,0 +1,19 @@
+/* Шрифты Chernyavskiy A-Tech */
+
+/* Goudy Old Style — Sorts Mill Goudy (Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* KOT-Eitai Gothic (OnlineWebFonts) */
+@import url('https://db.onlinewebfonts.com/c/267b9803e7597a9e52b5908ddd80a761?family=KOT-Eitai+Gothic+Bold');
+
+/* Century Old Style Std (OnlineWebFonts) */
+@import url('https://db.onlinewebfonts.com/c/82e0e15b44325039f247d68590934646?family=Century+Old+Style+Std');
+
+/* DwarvenStonecraftCyrExtended — локальный файл (скачать с myfontlib.com) */
+@font-face {
+    font-family: 'DwarvenStonecraftCyrExtended';
+    src: url('../fonts/DwarvenStonecraftCyrExtended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

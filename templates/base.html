@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Автосервис{% endblock %}</title>
+    <title>{% block title %}Chernyavskiy A-Tech{% endblock %}</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
@@ -12,13 +13,17 @@
     <header>
         <nav class="navbar">
             <div class="container">
-                <a href="{% url 'website:index' %}" class="logo">Автосервис</a>
+                <a href="{% url 'website:index' %}" class="logo">Chernyavskiy A-Tech</a>
                 <ul class="nav-menu">
+                    {% if request.resolver_match.url_name == 'estimate_request' %}
                     <li><a href="{% url 'website:index' %}">Главная</a></li>
+                    {% endif %}
                     <li><a href="{% url 'website:about' %}">О нас</a></li>
                     <li><a href="{% url 'website:services' %}">Услуги</a></li>
                     <li><a href="{% url 'website:contacts' %}">Контакты</a></li>
+                    {% if request.resolver_match.url_name != 'estimate_request' %}
                     <li><a href="{% url 'website:booking' %}" class="btn-primary">Записаться</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -42,12 +47,12 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Автосервис</h3>
+                    <h3>Chernyavskiy A-Tech</h3>
                     <p>Качественный ремонт и обслуживание автомобилей</p>
                 </div>
                 <div class="footer-section">
                     <h3>Контакты</h3>
-                    <p>Телефон: +7 (999) 123-45-67</p>
+                    <p>Телефон: +7 (950) 757-06-06</p>
                     <p>Email: info@autoservice.ru</p>
                 </div>
                 <div class="footer-section">
@@ -61,7 +66,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {% now "Y" %} Автосервис. Все права защищены.</p>
+                <p>&copy; {% now "Y" %} Chernyavskiy A-Tech. Все права защищены.</p>
             </div>
         </div>
     </footer>
