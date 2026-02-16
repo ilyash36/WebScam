@@ -4,12 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Chernyavskiy A-Tech{% endblock %}</title>
+    <script>
+    (function(){
+        var ref=document.referrer;
+        var origin=location.origin;
+        var isSameOrigin=ref&&ref.indexOf(origin)===0;
+        if(isSameOrigin){
+            document.documentElement.classList.add('skip-loader');
+        }
+    })();
+    </script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    <div class="page-loader" id="pageLoader">
+        <div class="page-loader__content">
+            <span class="page-loader__logo">Chernyavskiy A-Tech</span>
+            <div class="page-loader__bar">
+                <div class="page-loader__progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content" id="pageContent">
     <header>
         <nav class="navbar">
             <div class="container">
@@ -52,7 +72,8 @@
                 </div>
                 <div class="footer-section">
                     <h3>Контакты</h3>
-                    <p>Телефон: +7 (950) 757-06-06</p>
+                    <p>Телефон: <a href="https://t.me/+79507570606" target="_blank" rel="noopener noreferrer" class="link-address">+7 (950) 757-06-06</a></p>
+                    <p>Адрес: <a href="https://yandex.ru/maps/?pt=39.153217,51.637890&z=16" target="_blank" rel="noopener noreferrer" class="link-address">Воронеж, Кривошеина 7а</a></p>
                     <p>Email: info@autoservice.ru</p>
                 </div>
                 <div class="footer-section">
@@ -66,11 +87,14 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {% now "Y" %} Chernyavskiy A-Tech. Все права защищены.</p>
+                <p>&copy; {% now "Y" %} Chernyavskiy A-Tech</p>
             </div>
         </div>
+        <a href="https://1nowen.com" target="_blank" rel="noopener noreferrer" class="footer-text">Compose & Code by 1no<span class="highlight-wen">wen</span></a>
     </footer>
+    </div>
 
+    <script src="{% static 'js/loader.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>
