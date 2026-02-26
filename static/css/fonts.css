@@ -3,11 +3,33 @@
 /* Goudy Old Style — Sorts Mill Goudy (Google Fonts) */
 @import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital,wght@0,400;0,700;1,400&display=swap');
 
-/* KOT-Eitai Gothic (OnlineWebFonts) */
-@import url('https://db.onlinewebfonts.com/c/267b9803e7597a9e52b5908ddd80a761?family=KOT-Eitai+Gothic+Bold');
+/* KOT-Eitai Gothic Bold — CDN (приоритет для стабильности в Docker/Windows) */
+@font-face {
+    font-family: "KOT-Eitai Gothic Bold";
+    src: local("KOT-Eitai Gothic Bold"),
+         url("https://db.onlinewebfonts.com/t/267b9803e7597a9e52b5908ddd80a761.woff2")
+            format("woff2"),
+         url("https://db.onlinewebfonts.com/t/267b9803e7597a9e52b5908ddd80a761.woff")
+            format("woff"),
+         url("../fonts/KOT-EitaiGothicBold.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
-/* Century Old Style Std (OnlineWebFonts) */
-@import url('https://db.onlinewebfonts.com/c/82e0e15b44325039f247d68590934646?family=Century+Old+Style+Std');
+/* Century Old Style Std — локальные файлы (приоритет), затем CDN */
+@font-face {
+    font-family: "Century Old Style Std";
+    src: local("Century Old Style Std"),
+         url("../fonts/CenturyOldStyleStd.woff2") format("woff2"),
+         url("https://db.onlinewebfonts.com/t/82e0e15b44325039f247d68590934646.woff2")
+            format("woff2"),
+         url("https://db.onlinewebfonts.com/t/82e0e15b44325039f247d68590934646.woff")
+            format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
 /* DwarvenStonecraftCyrExtended — локальный файл (скачать с myfontlib.com) */
 @font-face {

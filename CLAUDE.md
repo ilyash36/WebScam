@@ -319,10 +319,10 @@ python manage.py migrate app_name previous_migration_name
 
 - **Бренд**: Chernyavskiy A-Tech (Автосервис Андрея Чернявского)
 - **Палитра**: чёрный (#0a0a0a), золотой (#d4af37), белый
-- **Шрифты**: `static/css/fonts.css` — KOT-Eitai Gothic Bold, Century Old Style Std, Goudy Old Style, DwarvenStonecraftCyrExtended
+- **Шрифты**: `static/css/fonts.css` — KOT-Eitai Gothic Bold, Century Old Style Std, Goudy Old Style, DwarvenStonecraftCyrExtended; KOT и Century — CDN приоритет (стабильность в Docker); preload в base.html
 - **Скругления**: эллиптические (кривые Безье) через `--radius-bezier-sm/md/lg`
 - **Контакты**: Телефон +7 (950) 757-06-06 — ссылка на t.me/+79507570606; адрес Воронеж, Кривошеина 7а — ссылка на Яндекс.Карты; режим работы Пн-Вс 10:00–20:00, по предварительной записи
-- **Футер**: «Compose & Code by 1nowen» — ссылка на 1nowen.com; анимация загрузки 1,5 с при первом визите (`static/js/loader.js`)
+- **Футер**: «Compose & Code by 1nowen» — ссылка на 1nowen.com, шрифт KOT; три столбца (Chernyavskiy A-Tech, Контакты, Быстрые ссылки) — grid 3 колонки по центру (max-width 960px); анимация загрузки 1,5 с при первом визите (`static/js/loader.js`)
 - **Страница «Услуги»**: текст о принципе технической диагностики в карточке; выравнивание по ширине; жирные акценты на ключевых фразах
 - **Страница «О нас»**: ценности включают Кайдзен (философия Toyota Production System)
 
