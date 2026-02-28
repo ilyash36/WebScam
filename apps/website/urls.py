@@ -12,6 +12,7 @@ urlpatterns = [
     path('services/', views.ServicesView.as_view(), name='services'),
     path('contacts/', views.ContactsView.as_view(), name='contacts'),
     path('booking/', views.BookingView.as_view(), name='booking'),
+    path('booking/ocr-sts/', views.ocr_sts_view, name='ocr_sts'),
     path('booking/success/', views.BookingSuccessView.as_view(), name='booking_success'),
     path('feedback/', views.FeedbackView.as_view(), name='feedback'),
     path('feedback/success/', views.FeedbackSuccessView.as_view(), name='feedback_success'),

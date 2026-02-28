@@ -25,6 +25,7 @@
 - Django 5.0+
 - PostgreSQL (production)
 - SQLite (development)
+- OCR СТС: облачный Yandex Workflow (Vision + AI Agent)
 
 ## Установка
 
@@ -50,7 +51,9 @@ Copy-Item .env.example .env
 cp .env.example .env
 ```
 
-Затем откройте `.env` и заполните `SECRET_KEY` (можно сгенерировать командой):
+Откройте `.env` и заполните:
+- `SECRET_KEY` (можно сгенерировать командой ниже)
+- `WORKFLOW_OCR_URL` и `WORKFLOW_OCR_SECRET` — для распознавания СТС на странице записи
 ```bash
 python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 ```

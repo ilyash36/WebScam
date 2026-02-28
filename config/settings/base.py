@@ -108,6 +108,18 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Yandex Cloud (для polling Workflow OCR)
+# API-ключ или IAM-токен (t1.xxx — Bearer)
+YANDEX_VISION_API_KEY = (
+    os.getenv('YANDEX_VISION_API_KEY')
+    or os.getenv('YANDEX_IAM_TOKEN', '')
+)
+YANDEX_FOLDER_ID = os.getenv('YANDEX_FOLDER_ID', '')
+
+# Workflow OCR (Vision + AI Agent)
+WORKFLOW_OCR_URL = os.getenv('WORKFLOW_OCR_URL', '')
+WORKFLOW_OCR_SECRET = os.getenv('WORKFLOW_OCR_SECRET', '')
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

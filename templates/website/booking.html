@@ -49,6 +49,13 @@
                 </div>
                 
                 <h2>Данные автомобиля</h2>
+                <div class="form-group sts-upload-group">
+                    <input type="file" id="stsFileInput" accept="image/*" capture="environment" style="display:none">
+                    <button type="button" class="btn btn-secondary" id="stsUploadBtn">
+                        Загрузить фото СТС
+                    </button>
+                    <span class="sts-upload-status" id="stsUploadStatus"></span>
+                </div>
                 <div class="form-group">
                     <label for="{{ form.vehicle_brand.id_for_label }}">{{ form.vehicle_brand.label }} *</label>
                     {{ form.vehicle_brand }}
@@ -75,10 +82,64 @@
                     </div>
                     
                     <div class="form-group">
+                        <label for="{{ form.vehicle_vin.id_for_label }}">{{ form.vehicle_vin.label }}</label>
+                        {{ form.vehicle_vin }}
+                        {% if form.vehicle_vin.errors %}
+                            <div class="error">{{ form.vehicle_vin.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
                         <label for="{{ form.vehicle_license_plate.id_for_label }}">{{ form.vehicle_license_plate.label }}</label>
                         {{ form.vehicle_license_plate }}
                         {% if form.vehicle_license_plate.errors %}
                             <div class="error">{{ form.vehicle_license_plate.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.vehicle_color.id_for_label }}">{{ form.vehicle_color.label }}</label>
+                        {{ form.vehicle_color }}
+                        {% if form.vehicle_color.errors %}
+                            <div class="error">{{ form.vehicle_color.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.vehicle_passport_number.id_for_label }}">{{ form.vehicle_passport_number.label }}</label>
+                        {{ form.vehicle_passport_number }}
+                        {% if form.vehicle_passport_number.errors %}
+                            <div class="error">{{ form.vehicle_passport_number.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.certificate_series_number.id_for_label }}">{{ form.certificate_series_number.label }}</label>
+                        {{ form.certificate_series_number }}
+                        {% if form.certificate_series_number.errors %}
+                            <div class="error">{{ form.certificate_series_number.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.vehicle_engine_volume.id_for_label }}">{{ form.vehicle_engine_volume.label }}</label>
+                        {{ form.vehicle_engine_volume }}
+                        {% if form.vehicle_engine_volume.errors %}
+                            <div class="error">{{ form.vehicle_engine_volume.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.vehicle_engine_power.id_for_label }}">{{ form.vehicle_engine_power.label }}</label>
+                        {{ form.vehicle_engine_power }}
+                        {% if form.vehicle_engine_power.errors %}
+                            <div class="error">{{ form.vehicle_engine_power.errors }}</div>
                         {% endif %}
                     </div>
                 </div>
@@ -107,4 +168,83 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function() {
+    var btn = document.getElementById('stsUploadBtn');
+    var input = document.getElementById('stsFileInput');
+    var status = document.getElementById('stsUploadStatus');
+    var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    var ocrUrl = '{% url "website:ocr_sts" %}';
+
+    function setStatus(msg, isError) {
+        status.textContent = msg;
+        status.className = 'sts-upload-status' + (isError ? ' error' : '');
+    }
+
+    var ocrFields = [
+        'vehicle_brand', 'vehicle_model', 'vehicle_year', 'vehicle_vin',
+        'vehicle_license_plate', 'vehicle_color', 'vehicle_passport_number',
+        'certificate_series_number', 'vehicle_engine_volume', 'vehicle_engine_power'
+    ];
+
+    function clearOcrFields() {
+        ocrFields.forEach(function(key) {
+            var el = document.getElementById('id_' + key);
+            if (el) el.value = '';
+        });
+    }
+
+    function fillForm(data) {
+        clearOcrFields();
+        for (var key in data) {
+            if (!Object.prototype.hasOwnProperty.call(data, key)) continue;
+            var id = 'id_' + key;
+            var el = document.getElementById(id);
+            if (el) el.value = data[key] || '';
+        }
+    }
+
+    btn.addEventListener('click', function() { input.click(); });
+
+    input.addEventListener('change', function() {
+        var file = input.files[0];
+        if (!file) return;
+        setStatus('Распознаём...');
+        btn.disabled = true;
+
+        var formData = new FormData();
+        formData.append('image', file);
+        formData.append('csrfmiddlewaretoken', csrfToken);
+
+        fetch(ocrUrl, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken
+            },
+            credentials: 'same-origin'
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(json) {
+            if (json.success && json.data) {
+                fillForm(json.data);
+                status.innerHTML = 'Распознано<br><span class="sts-upload-hint">Пожалуйста, дозаполните нераспознанную информацию</span>';
+                status.className = 'sts-upload-status';
+            } else {
+                setStatus(json.error || 'Текст не распознан', true);
+            }
+        })
+        .catch(function(err) {
+            setStatus('Ошибка загрузки', true);
+        })
+        .finally(function() {
+            btn.disabled = false;
+            input.value = '';
+        });
+    });
+})();
+</script>
 {% endblock %}

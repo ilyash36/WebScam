@@ -46,6 +46,9 @@
 │   │   ├── admin.py
 │   │   └── views.py
 │   ├── website/              # Публичный сайт (лендинг, формы)
+│   │   ├── ocr/              # OCR СТС через облачный Workflow
+│   │   │   ├── __init__.py
+│   │   │   └── workflow_ocr.py
 │   │   ├── templates/
 │   │   ├── views.py
 │   │   ├── forms.py
@@ -69,8 +72,32 @@
 ├── requirements-dev.txt    # Инструменты разработки
 ├── .env.example
 ├── manage.py
+├── scripts/
+│   └── test_workflow_ocr.py  # Тест OCR: отправка image_base64 в workflow
 └── README.md
 ```
+
+### OCR СТС (облачный Workflow)
+
+Распознавание и парсинг документов СТС/ПТС выполняются **полностью в облаке** (Yandex Workflow: Vision + AI Agent). Django не содержит локальной логики OCR.
+
+**Поток данных**:
+1. Клиент загружает фото СТС на странице записи (`/booking/`)
+2. Форма отправляет POST на `/booking/ocr-sts/` с полем `image`
+3. `ocr_sts_view` кодирует изображение в base64 и вызывает `ocr_via_workflow()`
+4. Workflow получает `image_base64`, выполняет Vision → AI Agent → JSON
+5. Django опрашивает execution API до получения результата (polling)
+6. JSON с полями формы возвращается клиенту для автозаполнения
+
+**Обязательные переменные окружения**:
+- `WORKFLOW_OCR_URL` — URL для запуска workflow (из настроек Yandex Cloud)
+- `WORKFLOW_OCR_SECRET` — секрет для проверки в workflow (Switch)
+
+**Опционально** (для polling execution API):
+- `YANDEX_VISION_API_KEY` или `YANDEX_IAM_TOKEN`
+- `YANDEX_FOLDER_ID`
+
+**Тест**: `python scripts/test_workflow_ocr.py путь/к/изображению.jpg`
 
 ### Принципы архитектуры
 

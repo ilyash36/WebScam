@@ -26,6 +26,9 @@ wheels/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+.ruff_cache/
+.coverage
+htmlcov/
 
 # Virtual Environment
 venv/
@@ -40,9 +43,10 @@ db.sqlite3-journal
 /media
 /staticfiles
 
-# Environment variables
+# Environment variables (секреты — не коммитить!)
 .env
 .env.local
+.env.*.local
 
 # IDE
 .vscode/
@@ -55,8 +59,8 @@ db.sqlite3-journal
 .DS_Store
 Thumbs.db
 
-# Cursor
-# .cursor/  # Не игнорируем dev_cache.md
+# Cursor (dev_cache.md — в репозитории для AI)
+.cursor/agent-transcripts/
 
 # Logs
 logs/

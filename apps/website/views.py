@@ -1,12 +1,18 @@
 """
 Представления для публичного сайта.
 """
+import base64
 import logging
+from django.conf import settings
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.generic import TemplateView
 from django.views import View
+from django.views.decorators.http import require_http_methods
+
 from .forms import BookingForm, FeedbackForm, EstimateRequestForm
+from .ocr import ocr_via_workflow
 from apps.core.models import Client, Vehicle
 
 logger = logging.getLogger(__name__)
@@ -87,30 +93,54 @@ class BookingView(View):
                 license_plate = (
                     form.cleaned_data.get('vehicle_license_plate') or None
                 )
+                vin = form.cleaned_data.get('vehicle_vin') or None
+                vin = (vin.replace(' ', '')[:17] if vin else None) or None
+                color = form.cleaned_data.get('vehicle_color') or None
+                defaults = {
+                    'brand': form.cleaned_data['vehicle_brand'],
+                    'model': form.cleaned_data['vehicle_model'],
+                    'year': form.cleaned_data.get('vehicle_year'),
+                    'vin': vin,
+                    'color': color,
+                }
                 vehicle, vehicle_created = Vehicle.objects.get_or_create(
                     client=client,
                     license_plate=license_plate,
-                    defaults={
-                        'brand': form.cleaned_data['vehicle_brand'],
-                        'model': form.cleaned_data['vehicle_model'],
-                        'year': form.cleaned_data.get('vehicle_year'),
-                    }
+                    defaults=defaults
                 )
-                
                 if not vehicle_created:
                     vehicle.brand = form.cleaned_data['vehicle_brand']
                     vehicle.model = form.cleaned_data['vehicle_model']
                     if form.cleaned_data.get('vehicle_year'):
                         vehicle.year = form.cleaned_data['vehicle_year']
+                    vehicle.vin = vin
+                    vehicle.color = color
+                    vehicle.license_plate = license_plate
                     vehicle.save()
                 
-                # Сохраняем сообщение в заметки автомобиля
+                # Собираем заметки: ПТС, СТС, объём двигателя + сообщение клиента
+                sts_parts = []
+                for key, label in [
+                    ('vehicle_passport_number', 'Паспорт ТС №'),
+                    ('certificate_series_number', 'Серия и номер СТС'),
+                    ('vehicle_engine_volume', 'Объём двигателя'),
+                    ('vehicle_engine_power', 'Мощность двигателя'),
+                ]:
+                    val = form.cleaned_data.get(key)
+                    if val:
+                        sts_parts.append(f"{label}: {val}")
+                if sts_parts:
+                    sts_block = "Данные СТС:\n" + "\n".join(sts_parts)
+                    vehicle.notes = (
+                        f"{sts_block}\n\n{vehicle.notes}"
+                        if vehicle.notes else sts_block
+                    )
                 if form.cleaned_data.get('message'):
-                    if vehicle.notes:
-                        vehicle.notes += f"\n\n{form.cleaned_data['message']}"
-                    else:
-                        vehicle.notes = form.cleaned_data['message']
-                    vehicle.save()
+                    vehicle.notes = (
+                        f"{vehicle.notes}\n\n{form.cleaned_data['message']}"
+                        if vehicle.notes else form.cleaned_data['message']
+                    )
+                vehicle.save()
                 
                 logger.info(
                     (
@@ -151,6 +181,63 @@ class BookingView(View):
 class BookingSuccessView(TemplateView):
     """Страница успешной отправки заявки."""
     template_name = 'website/booking_success.html'
+
+
+@require_http_methods(['POST'])
+def ocr_sts_view(request):
+    """
+    API: распознавание СТС через облачный Workflow (Vision + AI Agent).
+
+    Принимает POST с полем 'image' (файл изображения).
+    Возвращает JSON с полями для автозаполнения формы.
+    """
+    image_file = request.FILES.get('image')
+    if not image_file:
+        return JsonResponse(
+            {'error': 'Не указано изображение'},
+            status=400,
+        )
+
+    if image_file.size > 10 * 1024 * 1024:  # 10 MB
+        return JsonResponse(
+            {'error': 'Файл слишком большой (макс. 10 МБ)'},
+            status=400,
+        )
+
+    workflow_url = getattr(settings, 'WORKFLOW_OCR_URL', '') or ''
+    workflow_secret = getattr(settings, 'WORKFLOW_OCR_SECRET', '') or ''
+
+    if not workflow_url or not workflow_secret:
+        return JsonResponse(
+            {'error': 'WORKFLOW_OCR_URL и WORKFLOW_OCR_SECRET не настроены'},
+            status=503,
+        )
+
+    try:
+        image_bytes = image_file.read()
+        image_base64 = base64.b64encode(image_bytes).decode('utf-8')
+        api_key = getattr(settings, 'YANDEX_VISION_API_KEY', '') or ''
+        folder_id = getattr(settings, 'YANDEX_FOLDER_ID', '') or ''
+
+        data, err = ocr_via_workflow(
+            image_base64,
+            workflow_url,
+            workflow_secret,
+            api_key,
+            folder_id,
+        )
+        if data:
+            return JsonResponse({'success': True, 'data': data})
+        return JsonResponse(
+            {'error': err or 'Ошибка распознавания', 'data': {}},
+            status=200,
+        )
+    except Exception as e:
+        logger.error("Ошибка OCR СТС: %s", e, exc_info=True)
+        return JsonResponse(
+            {'error': str(e), 'data': {}},
+            status=500,
+        )
 
 
 class FeedbackView(View):

@@ -98,6 +98,7 @@ docker-compose exec web python manage.py collectstatic --noinput
 - `SECRET_KEY` - секретный ключ Django
 - `DB_HOST` - хост базы данных (автоматически `db` в Docker)
 - `DB_NAME`, `DB_USER`, `DB_PASSWORD` - настройки БД
+- `WORKFLOW_OCR_URL`, `WORKFLOW_OCR_SECRET` - для OCR СТС (облачный Workflow)
 
 ## Volumes
 

@@ -8,7 +8,9 @@
 
 Проект автосервиса Chernyavskiy A-Tech на Django — цифровой «мозг» автосервиса с поэтапным развитием: сайт → CRM → автоматизация. Текущий этап: сайт-витрина с формами записи. Backend: Python/Django, БД: PostgreSQL (prod), SQLite (dev). **Проект полностью контейнеризирован через Docker** — готов к деплою. Ветки: `main`, `dev`, `registration`.
 
-**Брендинг**: Chernyavskiy A-Tech. Палитра: чёрный, золотой, белый. Шрифты: KOT-Eitai Gothic Bold, Century Old Style Std, Goudy Old Style (Sorts Mill Goudy), DwarvenStonecraftCyrExtended (опционально).
+**Брендинг**: Chernyavskiy A-Tech. Палитра: чёрный (#0a0a0a), золотой (#d4af37), белый. Шрифты: KOT-Eitai Gothic Bold, Century Old Style Std, Goudy Old Style (Sorts Mill Goudy), DwarvenStonecraftCyrExtended (опционально).
+
+**OCR СТС (2026-02)**: Вся логика распознавания и парсинга вынесена в облачный Yandex Workflow (Vision + AI Agent). Django только отправляет `image_base64` и получает JSON. Локальный парсер, Vision API и RF_STS_Documentation удалены.
 
 ---
 
@@ -23,7 +25,7 @@
 ## Ключевые компоненты
 
 - **apps/core/** - базовые модели (Client, Vehicle) и утилиты
-- **apps/website/** - публичный сайт (лендинг, формы записи)
+- **apps/website/** - публичный сайт (лендинг, формы записи); OCR СТС через облачный Workflow (`ocr/workflow_ocr.py`)
 - **apps/crm/** - CRM функционал (будущее)
 - **apps/api/** - REST API (будущее)
 - **config/** - настройки Django проекта
@@ -53,6 +55,7 @@
 - **Docker**: проект полностью контейнеризирован, автоматические миграции при запуске, health checks для БД; в `Dockerfile.dev` используется `dos2unix` для `docker-entrypoint.sh` (корректная работа на Windows с CRLF)
 - **Дизайн**: Палитра чёрный/золотой/белый; эллиптические скругления (кривые Безье) через CSS-переменные `--radius-bezier-sm/md/lg`; шрифты в `static/css/fonts.css`; KOT и Century — CDN приоритет (для стабильности в Docker/Windows); preload для основных шрифтов в base.html
 - **Навигация**: На странице /estimate/ — кнопка «Главная» вместо «Записаться»; на остальных страницах — «Записаться» без «Главная»
+- **OCR СТС**: облачный Workflow (Vision + AI Agent) в Yandex Cloud; Django отправляет `image_base64`, получает JSON с полями формы; `apps/website/ocr/workflow_ocr.py`; требуется `WORKFLOW_OCR_URL` и `WORKFLOW_OCR_SECRET` в `.env`; при отсутствии — 503
 - **Контакты**: Телефон — ссылка на t.me/+79507570606; адрес «Воронеж, Кривошеина 7а» — ссылка на Яндекс.Карты (координаты 51.637890, 39.153217); режим работы Пн-Вс: 10:00–20:00, по предварительной записи; класс `.link-address` для единого стиля
 - **Футер**: «Compose & Code by 1nowen» — ссылка на 1nowen.com; шрифт KOT-Eitai Gothic Bold; «wen» с белым фоном и чёрными буквами; анимация увеличения при наведении; три столбца (Chernyavskiy A-Tech, Контакты, Быстрые ссылки) выровнены по центру страницы через grid (3 колонки, max-width 960px)
 - **Загрузка**: `static/js/loader.js` — анимация 1,5 с при первой загрузке (referrer не с сайта); при навигации внутри сайта — без анимации; inline-скрипт в head для мгновенного skip
@@ -224,6 +227,12 @@ class ClientCreateView(CreateView):
   - Preload шрифтов KOT и Century в base.html для ускорения загрузки
   - Футер «Compose & Code by 1nowen» — шрифт KOT
   - Три столбца футера (Chernyavskiy A-Tech, Контакты, Быстрые ссылки): grid 3 колонки, центрирование (max-width 960px, margin auto)
+- **2026-02**: OCR СТС полностью перенесён в облако (крупный рефакторинг):
+  - **Удалено**: локальный парсер `sts_parser.py`, Vision `yandex_vision.py`, справочник марок `brands.py`, вся директория `RF_STS_Documentation/` (спецификация, Brands.txt, Приказ МВД N 267), скрипт `scripts/generate_brands.py`
+  - **Архитектура**: Django → POST `image_base64` + `secret` → Workflow (Vision + AI Agent) → polling результата → JSON с полями формы
+  - **Обязательные переменные**: `WORKFLOW_OCR_URL`, `WORKFLOW_OCR_SECRET`; при отсутствии — 503
+  - **Опционально для polling**: `YANDEX_VISION_API_KEY`, `YANDEX_FOLDER_ID` (для авторизации запросов к execution API)
+  - **Тест**: `python scripts/test_workflow_ocr.py путь/к/изображению.jpg` — отправляет image_base64 в workflow
 
 ---
 

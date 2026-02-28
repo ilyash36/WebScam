@@ -466,6 +466,40 @@ header {
     min-height: 100px;
 }
 
+.sts-upload-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.sts-upload-status {
+    font-size: 0.9rem;
+    color: var(--color-gold-dark);
+}
+.sts-upload-status .sts-upload-hint {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(212, 175, 55, 0.85);
+    margin-top: 0.25rem;
+}
+.sts-upload-status.error {
+    color: #c0392b;
+}
+
+.sts-details {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: var(--radius-bezier-sm);
+}
+.sts-details summary {
+    cursor: pointer;
+    font-family: "KOT-Eitai Gothic Bold", sans-serif;
+    color: var(--color-gold-dark);
+}
+.sts-details[open] summary {
+    margin-bottom: 1rem;
+}
+
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;

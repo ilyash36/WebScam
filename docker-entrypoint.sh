@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Ждём PostgreSQL только если DB_HOST установлен
+# Р–РґС‘Рј PostgreSQL С‚РѕР»СЊРєРѕ РµСЃР»Рё DB_HOST СѓСЃС‚Р°РЅРѕРІР»РµРЅ
 if [ -n "$DB_HOST" ] && [ "$DB_HOST" != "localhost" ] && [ "$DB_HOST" != "127.0.0.1" ]; then
     echo "Waiting for PostgreSQL at $DB_HOST:$DB_PORT..."
     while ! nc -z "$DB_HOST" "$DB_PORT"; do
@@ -16,7 +16,7 @@ python manage.py migrate --noinput
 echo "Collecting static files..."
 python manage.py collectstatic --noinput || true
 
-# Создаём суперпользователя только в development режиме
+# РЎРѕР·РґР°С‘Рј СЃСѓРїРµСЂРїРѕР»СЊР·РѕРІР°С‚РµР»СЏ С‚РѕР»СЊРєРѕ РІ development СЂРµР¶РёРјРµ
 if [ "$DEBUG" = "True" ] || [ "$DEBUG" = "true" ]; then
     echo "Creating superuser if needed..."
     python manage.py shell << 'EOF' || true
