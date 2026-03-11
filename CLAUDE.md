@@ -46,9 +46,10 @@
 │   │   ├── admin.py
 │   │   └── views.py
 │   ├── website/              # Публичный сайт (лендинг, формы)
-│   │   ├── ocr/              # OCR СТС через облачный Workflow
+│   │   ├── ocr/              # OCR СТС (Vision API + локальный парсер)
 │   │   │   ├── __init__.py
-│   │   │   └── workflow_ocr.py
+│   │   │   ├── yandex_vision.py
+│   │   │   └── sts_parser.py
 │   │   ├── templates/
 │   │   ├── views.py
 │   │   ├── forms.py
@@ -73,31 +74,28 @@
 ├── .env.example
 ├── manage.py
 ├── scripts/
-│   └── test_workflow_ocr.py  # Тест OCR: отправка image_base64 в workflow
+│   ├── test_sts_parser.py    # Тест парсера (кэш или --live)
+│   ├── test_live_ocr.py      # End-to-end тест Vision API + парсер
+│   └── test_ocr_request.py  # POST изображения на /booking/ocr-sts/
 └── README.md
 ```
 
-### OCR СТС (облачный Workflow)
+### OCR СТС (Yandex Vision + локальный парсер)
 
-Распознавание и парсинг документов СТС/ПТС выполняются **полностью в облаке** (Yandex Workflow: Vision + AI Agent). Django не содержит локальной логики OCR.
+Распознавание СТС/ПТС: Yandex Vision OCR API → локальный парсер (`sts_parser.py`). Время: 1–3 сек.
 
 **Поток данных**:
 1. Клиент загружает фото СТС на странице записи (`/booking/`)
 2. Форма отправляет POST на `/booking/ocr-sts/` с полем `image`
-3. `ocr_sts_view` кодирует изображение в base64 и вызывает `ocr_via_workflow()`
-4. Workflow получает `image_base64`, выполняет Vision → AI Agent → JSON
-5. Django опрашивает execution API до получения результата (polling)
-6. JSON с полями формы возвращается клиенту для автозаполнения
+3. `ocr_sts_view` вызывает `recognize_document()` → Vision API
+4. `parse_sts()` парсит textAnnotation в поля формы
+5. JSON возвращается клиенту для автозаполнения
 
 **Обязательные переменные окружения**:
-- `WORKFLOW_OCR_URL` — URL для запуска workflow (из настроек Yandex Cloud)
-- `WORKFLOW_OCR_SECRET` — секрет для проверки в workflow (Switch)
+- `YANDEX_VISION_API_KEY` — API-ключ или IAM-токен
+- `YANDEX_FOLDER_ID` — ID каталога Yandex Cloud
 
-**Опционально** (для polling execution API):
-- `YANDEX_VISION_API_KEY` или `YANDEX_IAM_TOKEN`
-- `YANDEX_FOLDER_ID`
-
-**Тест**: `python scripts/test_workflow_ocr.py путь/к/изображению.jpg`
+**Тест**: `python scripts/test_ocr_request.py путь/к/изображению.jpg` или `python scripts/test_sts_parser.py --live`
 
 ### Принципы архитектуры
 

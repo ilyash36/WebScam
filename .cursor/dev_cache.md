@@ -10,7 +10,10 @@
 
 **Брендинг**: Chernyavskiy A-Tech. Палитра: чёрный (#0a0a0a), золотой (#d4af37), белый. Шрифты: KOT-Eitai Gothic Bold, Century Old Style Std, Goudy Old Style (Sorts Mill Goudy), DwarvenStonecraftCyrExtended (опционально).
 
-**OCR СТС (2026-02)**: Вся логика распознавания и парсинга вынесена в облачный Yandex Workflow (Vision + AI Agent). Django только отправляет `image_base64` и получает JSON. Локальный парсер, Vision API и RF_STS_Documentation удалены.
+**OCR СТС (2026-03)**: Yandex Vision OCR API + локальный парсер.  
+- `recognize_document()` → `parse_sts()` — 1–3 сек.  
+- Парсер протестирован на 6 реальных фотографиях СТС, 100% проверок пройдено.  
+- Облачный Workflow (AI Agent) удалён — был медленным (до 2 мин).
 
 ---
 
@@ -25,7 +28,7 @@
 ## Ключевые компоненты
 
 - **apps/core/** - базовые модели (Client, Vehicle) и утилиты
-- **apps/website/** - публичный сайт (лендинг, формы записи); OCR СТС через облачный Workflow (`ocr/workflow_ocr.py`)
+- **apps/website/** - публичный сайт (лендинг, формы записи); OCR СТС через Vision API + `ocr/sts_parser.py`
 - **apps/crm/** - CRM функционал (будущее)
 - **apps/api/** - REST API (будущее)
 - **config/** - настройки Django проекта
@@ -54,8 +57,9 @@
 - Длинные строки разбиваются на несколько с переносом
 - **Docker**: проект полностью контейнеризирован, автоматические миграции при запуске, health checks для БД; в `Dockerfile.dev` используется `dos2unix` для `docker-entrypoint.sh` (корректная работа на Windows с CRLF)
 - **Дизайн**: Палитра чёрный/золотой/белый; эллиптические скругления (кривые Безье) через CSS-переменные `--radius-bezier-sm/md/lg`; шрифты в `static/css/fonts.css`; KOT и Century — CDN приоритет (для стабильности в Docker/Windows); preload для основных шрифтов в base.html
+- **Админ-панель**: Стилизована под бренд Chernyavskiy A-Tech (`templates/admin/base_site.html`, `static/admin/css/custom.css`); site_header/site_title/index_title в config/urls.py
 - **Навигация**: На странице /estimate/ — кнопка «Главная» вместо «Записаться»; на остальных страницах — «Записаться» без «Главная»
-- **OCR СТС**: облачный Workflow (Vision + AI Agent) в Yandex Cloud; Django отправляет `image_base64`, получает JSON с полями формы; `apps/website/ocr/workflow_ocr.py`; требуется `WORKFLOW_OCR_URL` и `WORKFLOW_OCR_SECRET` в `.env`; при отсутствии — 503
+- **OCR СТС**: Yandex Vision API + локальный парсер (`yandex_vision.py`, `sts_parser.py`); `YANDEX_VISION_API_KEY` + `YANDEX_FOLDER_ID` — обязательны
 - **Контакты**: Телефон — ссылка на t.me/+79507570606; адрес «Воронеж, Кривошеина 7а» — ссылка на Яндекс.Карты (координаты 51.637890, 39.153217); режим работы Пн-Вс: 10:00–20:00, по предварительной записи; класс `.link-address` для единого стиля
 - **Футер**: «Compose & Code by 1nowen» — ссылка на 1nowen.com; шрифт KOT-Eitai Gothic Bold; «wen» с белым фоном и чёрными буквами; анимация увеличения при наведении; три столбца (Chernyavskiy A-Tech, Контакты, Быстрые ссылки) выровнены по центру страницы через grid (3 колонки, max-width 960px)
 - **Загрузка**: `static/js/loader.js` — анимация 1,5 с при первой загрузке (referrer не с сайта); при навигации внутри сайта — без анимации; inline-скрипт в head для мгновенного skip
@@ -227,12 +231,22 @@ class ClientCreateView(CreateView):
   - Preload шрифтов KOT и Century в base.html для ускорения загрузки
   - Футер «Compose & Code by 1nowen» — шрифт KOT
   - Три столбца футера (Chernyavskiy A-Tech, Контакты, Быстрые ссылки): grid 3 колонки, центрирование (max-width 960px, margin auto)
-- **2026-02**: OCR СТС полностью перенесён в облако (крупный рефакторинг):
-  - **Удалено**: локальный парсер `sts_parser.py`, Vision `yandex_vision.py`, справочник марок `brands.py`, вся директория `RF_STS_Documentation/` (спецификация, Brands.txt, Приказ МВД N 267), скрипт `scripts/generate_brands.py`
-  - **Архитектура**: Django → POST `image_base64` + `secret` → Workflow (Vision + AI Agent) → polling результата → JSON с полями формы
-  - **Обязательные переменные**: `WORKFLOW_OCR_URL`, `WORKFLOW_OCR_SECRET`; при отсутствии — 503
-  - **Опционально для polling**: `YANDEX_VISION_API_KEY`, `YANDEX_FOLDER_ID` (для авторизации запросов к execution API)
-  - **Тест**: `python scripts/test_workflow_ocr.py путь/к/изображению.jpg` — отправляет image_base64 в workflow
+- **2026-02**: OCR СТС полностью перенесён в облако — `sts_parser.py`, `yandex_vision.py` удалены, Workflow (Vision + AI Agent) — единственный путь.
+- **2026-03**: Восстановлен быстрый путь OCR (причина: AI Agent в Workflow давал задержку до 2 минут из-за cold start serverless-функции и LLM-петли при плохом OCR):
+  - **Добавлено**: `apps/website/ocr/yandex_vision.py` — прямой вызов Vision OCR API (1–3 сек)
+  - **Добавлено**: `apps/website/ocr/sts_parser.py` — локальный парсер полей СТС из textAnnotation
+    - VIN: приоритет Кузов-поля, затем VIN-метка, сборка из фрагментов
+    - Марка/Модель: предпочтение латинице, коррекция OCR-ошибок (RKODA→SKODA) через WMI-словарь
+    - Сертификат: Yandex entities["phone"] — надёжный источник номера СТС
+    - Диакритика: нормализация PRÍORA → PRIORA
+  - **ocr_sts_view**: только Vision API → парсер (Workflow удалён)
+  - **Тест**: `python scripts/test_sts_parser.py` (100% на 6 фото), `python scripts/test_live_ocr.py` (live API)
+  - **Обязательные переменные**: `YANDEX_VISION_API_KEY`, `YANDEX_FOLDER_ID`
+  - **Удалено**: `workflow_ocr.py`, `ocr_callback_view`, `generate_workflow_secret`, `test_workflow_ocr.py`, WORKFLOW_* настройки
+- **2026-03**: Стилизация админ-панели под бренд Chernyavskiy A-Tech:
+  - `templates/admin/base_site.html` — брендинг, подключение fonts.css и custom.css
+  - `static/admin/css/custom.css` — палитра чёрный/золотой/белый, шрифты KOT и Century, эллиптические скругления
+  - `config/urls.py` — site_header, site_title, index_title для AdminSite
 
 ---
 

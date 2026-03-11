@@ -35,7 +35,7 @@ cp .env.example .env
 2. Откройте `.env` и заполните настройки:
    - `SECRET_KEY` - сгенерируйте новый секретный ключ (можно использовать команду ниже)
    - `DEBUG=True` - для разработки
-   - `WORKFLOW_OCR_URL`, `WORKFLOW_OCR_SECRET` - для распознавания СТС (см. `.env.example`)
+   - `YANDEX_VISION_API_KEY`, `YANDEX_FOLDER_ID` - для распознавания СТС (см. `.env.example`)
    - Остальные настройки можно оставить по умолчанию для разработки
 
 3. Для генерации SECRET_KEY выполните в Python:

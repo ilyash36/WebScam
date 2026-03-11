@@ -1,8 +1,14 @@
 """
-Модуль OCR для распознавания данных из документов СТС.
+Модуль OCR для распознавания данных из документов СТС/ПТС.
 
-Распознавание выполняется в облачном Workflow (Vision + AI Agent).
+Yandex Vision OCR API → локальный парсер (sts_parser.py).
+Время: 1–3 секунды.
 """
-from .workflow_ocr import ocr_via_workflow
+from .yandex_vision import recognize_document, mime_from_filename
+from .sts_parser import parse_sts
 
-__all__ = ('ocr_via_workflow',)
+__all__ = (
+    'recognize_document',
+    'mime_from_filename',
+    'parse_sts',
+)

@@ -1,8 +1,8 @@
 """
 Представления для публичного сайта.
 """
-import base64
 import logging
+
 from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -12,7 +12,7 @@ from django.views import View
 from django.views.decorators.http import require_http_methods
 
 from .forms import BookingForm, FeedbackForm, EstimateRequestForm
-from .ocr import ocr_via_workflow
+from .ocr import recognize_document, mime_from_filename, parse_sts
 from apps.core.models import Client, Vehicle
 
 logger = logging.getLogger(__name__)
@@ -186,7 +186,10 @@ class BookingSuccessView(TemplateView):
 @require_http_methods(['POST'])
 def ocr_sts_view(request):
     """
-    API: распознавание СТС через облачный Workflow (Vision + AI Agent).
+    API: распознавание СТС через Yandex Vision OCR + локальный парсер.
+
+    1. Yandex Vision OCR API → textAnnotation (1–3 сек)
+    2. Локальный парсер sts_parser.py → поля формы (мгновенно)
 
     Принимает POST с полем 'image' (файл изображения).
     Возвращает JSON с полями для автозаполнения формы.
@@ -204,32 +207,44 @@ def ocr_sts_view(request):
             status=400,
         )
 
-    workflow_url = getattr(settings, 'WORKFLOW_OCR_URL', '') or ''
-    workflow_secret = getattr(settings, 'WORKFLOW_OCR_SECRET', '') or ''
+    try:
+        image_bytes = image_file.read()
+    except Exception as e:
+        logger.error("Ошибка чтения файла: %s", e, exc_info=True)
+        return JsonResponse({'error': str(e), 'data': {}}, status=500)
 
-    if not workflow_url or not workflow_secret:
+    api_key = getattr(settings, 'YANDEX_VISION_API_KEY', '') or ''
+    folder_id = getattr(settings, 'YANDEX_FOLDER_ID', '') or ''
+
+    if not api_key or not folder_id:
         return JsonResponse(
-            {'error': 'WORKFLOW_OCR_URL и WORKFLOW_OCR_SECRET не настроены'},
+            {
+                'error': (
+                    'OCR недоступен: настройте YANDEX_VISION_API_KEY и '
+                    'YANDEX_FOLDER_ID в .env'
+                ),
+                'data': {},
+            },
             status=503,
         )
 
     try:
-        image_bytes = image_file.read()
-        image_base64 = base64.b64encode(image_bytes).decode('utf-8')
-        api_key = getattr(settings, 'YANDEX_VISION_API_KEY', '') or ''
-        folder_id = getattr(settings, 'YANDEX_FOLDER_ID', '') or ''
-
-        data, err = ocr_via_workflow(
-            image_base64,
-            workflow_url,
-            workflow_secret,
-            api_key,
-            folder_id,
+        mime = mime_from_filename(image_file.name or '')
+        ta, vision_err = recognize_document(
+            image_bytes, api_key, folder_id, mime
         )
-        if data:
-            return JsonResponse({'success': True, 'data': data})
+        if ta is not None:
+            form_data = parse_sts(ta)
+            logger.info(
+                "OCR СТС: успешно, VIN=%s",
+                form_data.get('vehicle_vin', ''),
+            )
+            return JsonResponse({'success': True, 'data': form_data})
         return JsonResponse(
-            {'error': err or 'Ошибка распознавания', 'data': {}},
+            {
+                'error': vision_err or 'Не удалось распознать документ',
+                'data': {},
+            },
             status=200,
         )
     except Exception as e:

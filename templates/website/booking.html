@@ -179,9 +179,14 @@
     var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     var ocrUrl = '{% url "website:ocr_sts" %}';
 
-    function setStatus(msg, isError) {
-        status.textContent = msg;
-        status.className = 'sts-upload-status' + (isError ? ' error' : '');
+    function setStatus(msg, isError, isLoading) {
+        if (isLoading) {
+            status.innerHTML = '<span class="sts-loading-spinner" aria-hidden="true"></span> ' + msg;
+            status.className = 'sts-upload-status loading';
+        } else {
+            status.textContent = msg;
+            status.className = 'sts-upload-status' + (isError ? ' error' : '');
+        }
     }
 
     var ocrFields = [
@@ -212,7 +217,7 @@
     input.addEventListener('change', function() {
         var file = input.files[0];
         if (!file) return;
-        setStatus('Распознаём...');
+        setStatus('Распознаём', false, true);
         btn.disabled = true;
 
         var formData = new FormData();
