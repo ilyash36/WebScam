@@ -27,7 +27,7 @@
 
 ## Ключевые компоненты
 
-- **apps/core/** - базовые модели (Client, Vehicle) и утилиты
+- **apps/core/** - базовые модели (Client, Vehicle, BookingRequest), сервисы (email), утилиты
 - **apps/website/** - публичный сайт (лендинг, формы записи); OCR СТС через Vision API + `ocr/sts_parser.py`
 - **apps/crm/** - CRM функционал (будущее)
 - **apps/api/** - REST API (будущее)
@@ -47,8 +47,8 @@
 - Все модели наследуются от BaseModel с `created_at`, `updated_at`
 - Человекочитаемые статусы (не "PENDING", а "Ожидает согласования")
 - Валидация на уровне модели и формы
-- Защита от дубликатов клиентов/автомобилей
-- **Сообщения об ошибках уникальности** на корректном русском: `Client.phone` — «Клиент с таким телефоном уже существует.»; `Vehicle.vin` — «Автомобиль с таким VIN номером уже существует.» (через `error_messages={'unique': '...'}` в модели и при необходимости в форме)
+- Защита от дубликатов клиентов/автомобилей (soft-unique — только среди активных)
+- **Уникальность email и VIN** — НЕ на уровне БД, а на уровне view/check-conflicts среди `is_active=True`. Деактивированные клиенты не блокируют повторную регистрацию.
 - Секреты в `.env` (не коммитить!)
 - Логирование важных действий
 - **PEP 8 строго соблюдается**: длина строк до 79-88 символов, правильные импорты, trailing commas
@@ -57,8 +57,9 @@
 - Длинные строки разбиваются на несколько с переносом
 - **Docker**: проект полностью контейнеризирован, автоматические миграции при запуске, health checks для БД; в `Dockerfile.dev` используется `dos2unix` для `docker-entrypoint.sh` (корректная работа на Windows с CRLF)
 - **Дизайн**: Палитра чёрный/золотой/белый; эллиптические скругления (кривые Безье) через CSS-переменные `--radius-bezier-sm/md/lg`; шрифты в `static/css/fonts.css`; KOT и Century — CDN приоритет (для стабильности в Docker/Windows); preload для основных шрифтов в base.html
-- **Админ-панель**: Стилизована под бренд Chernyavskiy A-Tech (`templates/admin/base_site.html`, `static/admin/css/custom.css`); site_header/site_title/index_title в config/urls.py
-- **Навигация**: На странице /estimate/ — кнопка «Главная» вместо «Записаться»; на остальных страницах — «Записаться» без «Главная»
+- **Админ-панель**: Стилизована под бренд Chernyavskiy A-Tech (`templates/admin/base_site.html`, `static/admin/css/custom.css`); site_header/site_title/index_title в config/urls.py; admin actions «Деактивировать» / «Активировать» клиентов
+- **Навигация**: На странице /estimate/ — кнопка «Главная»; при авторизации — «Личный кабинет» + «Выйти» вместо «Записаться»
+- **Сессии**: `SESSION_COOKIE_AGE = 604800` (7 дней), `SESSION_SAVE_EVERY_REQUEST = True`; `ClientAuthMiddleware` → `request.client`
 - **OCR СТС**: Yandex Vision API + локальный парсер (`yandex_vision.py`, `sts_parser.py`); `YANDEX_VISION_API_KEY` + `YANDEX_FOLDER_ID` — обязательны
 - **Контакты**: Телефон — ссылка на t.me/+79507570606; адрес «Воронеж, Кривошеина 7а» — ссылка на Яндекс.Карты (координаты 51.637890, 39.153217); режим работы Пн-Вс: 10:00–20:00, по предварительной записи; класс `.link-address` для единого стиля
 - **Футер**: «Compose & Code by 1nowen» — ссылка на 1nowen.com; шрифт KOT-Eitai Gothic Bold; «wen» с белым фоном и чёрными буквами; анимация увеличения при наведении; три столбца (Chernyavskiy A-Tech, Контакты, Быстрые ссылки) выровнены по центру страницы через grid (3 колонки, max-width 960px)
@@ -247,6 +248,55 @@ class ClientCreateView(CreateView):
   - `templates/admin/base_site.html` — брендинг, подключение fonts.css и custom.css
   - `static/admin/css/custom.css` — палитра чёрный/золотой/белый, шрифты KOT и Century, эллиптические скругления
   - `config/urls.py` — site_header, site_title, index_title для AdminSite
+- **2026-03**: Парсер СТС — нормализация brand/model в латиницу:
+  - `_BRAND_NORMALIZE` (~60 записей), `_MODEL_NORMALIZE`, `_TRANSLIT`, homoglyph detection (`_HOMOGLYPH_CYR_TO_LAT`)
+  - WMI-коррекция, Levenshtein distance для fuzzy matching
+  - 100% тестов пройдено на 6 фотографиях СТС
+- **2026-03**: Удалён Workflow OCR (AI Agent):
+  - Удалены `workflow_ocr.py`, `ocr_callback_view`, `generate_workflow_secret`, `test_workflow_ocr.py`
+  - Удалены `WORKFLOW_*` настройки из `settings/base.py` и `.env.example`
+- **2026-03**: Форма записи (booking) — рефакторинг полей:
+  - Убраны: `last_name` (необязательно), `certificate_series_number`
+  - Добавлены: `consent_personal_data` (единый чекбокс вместо sms/email)
+  - `email` — обязательное поле
+  - VIN — обязательное поле (идентификация + подбор запчастей)
+- **2026-03**: Passwordless auth (вход по коду из email):
+  - Шлюз на `/booking/`: «Вы уже были у нас?» → «Да» (auth) / «Ещё нет» (форма)
+  - `auth_send_code_view` → отправляет 6-значный код на email
+  - `auth_verify_code_view` → проверяет код, логинит в session
+  - `verify_email_view` → подтверждение email по токену из письма
+  - Модель `Client`: `is_verified`, `verification_token`, `auth_code` + helper-методы
+  - `apps/core/services/email.py` — `send_verification_email()`, `send_auth_code()`
+  - Шаблоны: `booking_pending.html`, `verify_email_done.html`, `email/verify_email.html`, `email/auth_code.html`
+- **2026-03**: Личный кабинет клиента:
+  - `dashboard_view` — профиль, автомобили, история заявок
+  - Декоратор `client_required` — проверка session + `is_verified` + `is_active`
+  - Шаблон `dashboard.html` со стилями `.dashboard`, `.profile-card`, `.vehicle-card`, `.booking-card`
+- **2026-03**: Модель `BookingRequest` (`apps/core/models/booking_request.py`):
+  - Статусы: `pending_confirmation`, `confirmed`, `in_progress`, `completed`, `cancelled`
+  - Связи: `client` (FK), `vehicle` (FK)
+  - Поля: `message`, `vehicle_passport_number`, `vehicle_engine_volume`, `vehicle_engine_power`, `notes`
+- **2026-03**: Конфликты email/VIN, деактивация аккаунтов, безопасность:
+  - `Client.is_active` — мягкая деактивация (только через админ-панель)
+  - `Vehicle.vin` — убран `unique=True`; уникальность проверяется только среди активных клиентов в view
+  - `Client.email` — НЕ unique на уровне БД; проверка только среди `is_active=True`
+  - AJAX `/booking/check-conflicts/` — проверка email + VIN перед submit формы
+    - Email совпал с активным → отправка кода авторизации
+    - VIN совпал с активным → код на masked email (`i*******@gmail.com`) + ссылка на Telegram
+    - Деактивированные — не блокируют: разрешаем создание нового аккаунта
+  - `Client.masked_email` property — `"i*******@gmail.com"`
+  - Rate limiting: max 3 отправки кода за 15 мин (`auth_code_send_count`, `auth_code_last_send_at`)
+  - Brute-force защита: блокировка после 5 ошибок на 15 мин (`auth_code_failed_attempts`, `auth_code_failed_at`)
+  - `verify_auth_code()` обновлён: инкремент ошибок при неудаче, полный сброс при успехе
+  - Admin actions: «Деактивировать» / «Активировать» клиентов
+  - `client_required`, `auth_send_code_view`, `auth_verify_code_view`, `verify_email_view` — все проверяют `is_active=True`
+  - Frontend: JS перехват submit → проверка через check-conflicts → показ сообщения → переключение на auth-панель
+- **2026-03**: Сессии и UI авторизованного клиента:
+  - `SESSION_COOKIE_AGE = 604800` (7 дней), `SESSION_SAVE_EVERY_REQUEST = True`
+  - `ClientAuthMiddleware` — загружает `request.client` по `session['client_id']`
+  - `client_context` — передаёт `client` в шаблоны
+  - base.html: при `client` — «Личный кабинет» + «Выйти» вместо «Записаться»
+  - /booking/: авторизованные видят форму сразу (шлюз скрыт), предзаполнение имени/телефона/email
 
 ---
 

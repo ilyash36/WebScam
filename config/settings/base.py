@@ -41,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.website.middleware.ClientAuthMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -56,6 +57,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.website.context_processors.client_context',
             ],
         },
     },
@@ -118,6 +120,10 @@ YANDEX_FOLDER_ID = os.getenv('YANDEX_FOLDER_ID', '')
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Сессии: авторизация клиента сохраняется на 7 дней
+SESSION_COOKIE_AGE = 604800  # 1 неделя (секунды)
+SESSION_SAVE_EVERY_REQUEST = True  # продлевать сессию при каждом запросе
 
 # Логирование
 LOGS_DIR = BASE_DIR / 'logs'

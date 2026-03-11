@@ -44,7 +44,12 @@
                     <li><a href="{% url 'website:services' %}">Услуги</a></li>
                     <li><a href="{% url 'website:contacts' %}">Контакты</a></li>
                     {% if request.resolver_match.url_name != 'estimate_request' %}
+                    {% if client %}
+                    <li><a href="{% url 'website:dashboard' %}" class="btn-primary">Личный кабинет</a></li>
+                    <li><a href="{% url 'website:logout' %}">Выйти</a></li>
+                    {% else %}
                     <li><a href="{% url 'website:booking' %}" class="btn-primary">Записаться</a></li>
+                    {% endif %}
                     {% endif %}
                 </ul>
             </div>
@@ -84,7 +89,7 @@
                         <li><a href="{% url 'website:about' %}">О нас</a></li>
                         <li><a href="{% url 'website:services' %}">Услуги</a></li>
                         <li><a href="{% url 'website:contacts' %}">Контакты</a></li>
-                        <li><a href="{% url 'website:booking' %}">Записаться</a></li>
+                        <li><a href="{% if client %}{% url 'website:dashboard' %}{% else %}{% url 'website:booking' %}{% endif %}">{% if client %}Личный кабинет{% else %}Записаться{% endif %}</a></li>
                     </ul>
                 </div>
             </div>

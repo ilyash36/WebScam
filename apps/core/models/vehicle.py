@@ -36,12 +36,8 @@ class Vehicle(BaseModel):
         max_length=17,
         blank=True,
         null=True,
-        unique=True,
         verbose_name="VIN номер",
         help_text="17 символов",
-        error_messages={
-            'unique': 'Автомобиль с таким VIN номером уже существует.',
-        },
     )
     license_plate = models.CharField(
         max_length=20,

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Подтверждение email - Автосервис{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        {% if success %}
+        <h1>Email подтверждён!</h1>
+        {% else %}
+        <h1>Ошибка подтверждения</h1>
+        {% endif %}
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="success-message">
+            {% if success %}
+            <h2>Добро пожаловать, {{ client.first_name }}!</h2>
+            <p>Ваша электронная почта подтверждена, а заявка принята в работу.</p>
+            <a href="{% url 'website:dashboard' %}" class="btn btn-primary">Перейти в личный кабинет</a>
+            {% else %}
+            <p>{{ error }}</p>
+            <a href="{% url 'website:booking' %}" class="btn btn-primary">Записаться заново</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -420,6 +420,328 @@ header {
     margin: 0 auto;
 }
 
+.booking-gate {
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: var(--radius-bezier-md);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    text-align: center;
+}
+
+.booking-gate-question {
+    font-family: "KOT-Eitai Gothic Bold", "Century Old Style Std", sans-serif;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-black);
+}
+
+.booking-gate-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.booking-gate-buttons .btn {
+    min-width: 140px;
+}
+
+/* Auth panel (passwordless login) */
+.auth-panel {
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: var(--radius-bezier-md);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    text-align: center;
+}
+
+.auth-label {
+    font-family: "KOT-Eitai Gothic Bold", "Century Old Style Std", sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--color-black);
+}
+
+.auth-input {
+    width: 100%;
+    max-width: 320px;
+    padding: 0.75rem;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: var(--radius-bezier-sm);
+    font-size: 1rem;
+    font-family: inherit;
+    text-align: center;
+    margin-bottom: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.auth-input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.auth-code-input {
+    font-size: 1.5rem;
+    letter-spacing: 6px;
+    font-family: monospace;
+    max-width: 200px;
+}
+
+.auth-error {
+    color: #c0392b;
+    font-size: 0.9rem;
+    min-height: 1.3em;
+    margin-top: 0.5rem;
+}
+
+.conflict-message {
+    background: rgba(192, 57, 43, 0.1);
+    border: 1px solid rgba(192, 57, 43, 0.3);
+    border-radius: var(--radius-bezier-sm);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #e8e8e8;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.conflict-message a {
+    color: var(--color-gold);
+    text-decoration: underline;
+}
+
+.auth-back-link {
+    background: none;
+    border: none;
+    color: var(--color-gold-dark);
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    display: inline-block;
+    font-family: inherit;
+}
+
+.auth-back-link:hover {
+    color: var(--color-gold);
+}
+
+.auth-panel .btn {
+    display: block;
+    margin: 0 auto;
+    max-width: 320px;
+    width: 100%;
+}
+
+/* Dashboard */
+.dashboard {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.dashboard-section {
+    margin-bottom: 2.5rem;
+}
+
+.dashboard-section h2 {
+    font-family: "KOT-Eitai Gothic Bold", "Century Old Style Std", sans-serif;
+    font-size: 1.3rem;
+    color: var(--color-black);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-gold);
+}
+
+.profile-card {
+    background: var(--color-white);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: var(--radius-bezier-md);
+    padding: 1.5rem;
+}
+
+.profile-field {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.profile-field:last-child {
+    border-bottom: none;
+}
+
+.profile-label {
+    font-weight: bold;
+    min-width: 100px;
+    color: var(--color-black);
+    font-family: "KOT-Eitai Gothic Bold", "Century Old Style Std", sans-serif;
+    font-size: 0.9rem;
+}
+
+.profile-value {
+    color: #333;
+}
+
+/* Vehicle cards */
+.vehicle-cards {
+    display: grid;
+    gap: 1rem;
+}
+
+.vehicle-card {
+    background: var(--color-white);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: var(--radius-bezier-md);
+    overflow: hidden;
+}
+
+.vehicle-card-header {
+    background: linear-gradient(135deg, var(--color-black) 0%, var(--color-black-soft) 100%);
+    color: var(--color-gold);
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "KOT-Eitai Gothic Bold", "Century Old Style Std", sans-serif;
+}
+
+.vehicle-year {
+    font-size: 0.9rem;
+    color: var(--color-gold-light);
+}
+
+.vehicle-card-body {
+    padding: 1rem 1.25rem;
+}
+
+.vehicle-detail {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.3rem 0;
+}
+
+.detail-label {
+    font-weight: bold;
+    min-width: 80px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.detail-value {
+    font-family: monospace;
+    color: var(--color-black);
+}
+
+/* Booking cards */
+.booking-cards {
+    display: grid;
+    gap: 1rem;
+}
+
+.booking-card {
+    background: var(--color-white);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: var(--radius-bezier-md);
+    overflow: hidden;
+}
+
+.booking-card-header {
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-off-white);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.booking-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.booking-status-badge {
+    font-family: "KOT-Eitai Gothic Bold", "Century Old Style Std", sans-serif;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-bezier-sm);
+    background: var(--color-gold);
+    color: var(--color-black);
+}
+
+.booking-status-pending_confirmation .booking-status-badge {
+    background: #f39c12;
+    color: #fff;
+}
+
+.booking-status-confirmed .booking-status-badge {
+    background: #27ae60;
+    color: #fff;
+}
+
+.booking-status-in_progress .booking-status-badge {
+    background: #3498db;
+    color: #fff;
+}
+
+.booking-status-completed .booking-status-badge {
+    background: var(--color-gold);
+    color: var(--color-black);
+}
+
+.booking-status-cancelled .booking-status-badge {
+    background: #95a5a6;
+    color: #fff;
+}
+
+.booking-card-body {
+    padding: 1rem 1.25rem;
+}
+
+.booking-vehicle {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.booking-message {
+    color: #444;
+    margin-bottom: 0.5rem;
+}
+
+.booking-detail {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.booking-notes {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.empty-state {
+    color: #999;
+    font-style: italic;
+    padding: 1rem 0;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.hint {
+    color: #999;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
 .booking-form,
 .feedback-form,
 .estimate-form {

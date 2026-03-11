@@ -60,12 +60,6 @@ class BookingForm(forms.ModelForm):
         required=True,
         widget=forms.TextInput(attrs={'placeholder': '77 XX 654321'}),
     )
-    certificate_series_number = forms.CharField(
-        max_length=20,
-        label="Серия и номер СТС",
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': '77 66 555555'}),
-    )
     vehicle_engine_volume = forms.CharField(
         max_length=6,
         label="Объём двигателя, куб.см",
@@ -89,22 +83,25 @@ class BookingForm(forms.ModelForm):
         required=False,
     )
     
-    # Согласия
-    consent_sms = forms.BooleanField(
-        required=False,
-        label="Согласен получать SMS-уведомления",
-    )
-    consent_email = forms.BooleanField(
-        required=False,
-        label="Согласен получать Email-уведомления",
+    # Согласие на обработку персональных данных
+    consent_personal_data = forms.BooleanField(
+        required=True,
+        label=(
+            "Я согласен с обработкой персональных данных "
+            "в соответствии с Федеральным законом №152-ФЗ"
+        ),
+        error_messages={
+            'required': (
+                'Необходимо дать согласие на обработку персональных данных.'
+            ),
+        },
     )
     
     class Meta:
         model = Client
-        fields = ['first_name', 'last_name', 'phone', 'email']
+        fields = ['first_name', 'phone', 'email']
         labels = {
             'first_name': 'Имя',
-            'last_name': 'Фамилия',
             'phone': 'Телефон',
             'email': 'Email',
         }
@@ -116,16 +113,19 @@ class BookingForm(forms.ModelForm):
                 attrs={'placeholder': 'email@example.com'}
             ),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['phone'].validators.append(self.phone_validator)
         self.fields['phone'].required = True
         self.fields['first_name'].required = True
-        self.fields['last_name'].required = True
-        self.fields['phone'].error_messages['unique'] = (
-            'Клиент с таким телефоном уже существует.'
-        )
+        self.fields['email'].required = True
+        # Не блокируем повторную отправку для существующих клиентов —
+        # get_or_create в view обработает дубликаты.
+        self.fields['phone'].validators = [
+            v for v in self.fields['phone'].validators
+            if not hasattr(v, 'queryset')
+        ]
 
     def clean_vehicle_engine_volume(self):
         """Оставляет только цифры (объём в куб.см)."""

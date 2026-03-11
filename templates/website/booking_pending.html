@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Подтвердите email - Автосервис{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Почти готово!</h1>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="success-message">
+            <h2>Подтвердите вашу электронную почту</h2>
+            <p>Мы отправили письмо с ссылкой для подтверждения на указанный вами email.</p>
+            <p><strong>Мы запишем вас сразу после подтверждения.</strong></p>
+            <p class="hint">Если письмо не пришло, проверьте папку «Спам».</p>
+            <a href="{% url 'website:index' %}" class="btn btn-primary">Вернуться на главную</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

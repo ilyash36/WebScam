@@ -13,9 +13,57 @@ urlpatterns = [
     path('contacts/', views.ContactsView.as_view(), name='contacts'),
     path('booking/', views.BookingView.as_view(), name='booking'),
     path('booking/ocr-sts/', views.ocr_sts_view, name='ocr_sts'),
-    path('booking/success/', views.BookingSuccessView.as_view(), name='booking_success'),
+    path(
+        'booking/check-conflicts/',
+        views.check_conflicts_view,
+        name='check_conflicts',
+    ),
+    path(
+        'booking/pending/',
+        views.BookingPendingView.as_view(),
+        name='booking_pending',
+    ),
+    path(
+        'booking/success/',
+        views.BookingSuccessView.as_view(),
+        name='booking_success',
+    ),
+    # Подтверждение email
+    path(
+        'verify-email/<str:token>/',
+        views.verify_email_view,
+        name='verify_email',
+    ),
+    # Passwordless auth
+    path(
+        'auth/send-code/',
+        views.auth_send_code_view,
+        name='auth_send_code',
+    ),
+    path(
+        'auth/verify-code/',
+        views.auth_verify_code_view,
+        name='auth_verify_code',
+    ),
+    # Личный кабинет
+    path('dashboard/', views.dashboard_view, name='dashboard'),
+    path('logout/', views.logout_view, name='logout'),
+    # Обратная связь
     path('feedback/', views.FeedbackView.as_view(), name='feedback'),
-    path('feedback/success/', views.FeedbackSuccessView.as_view(), name='feedback_success'),
-    path('estimate/', views.EstimateRequestView.as_view(), name='estimate_request'),
-    path('estimate/success/', views.EstimateSuccessView.as_view(), name='estimate_success'),
+    path(
+        'feedback/success/',
+        views.FeedbackSuccessView.as_view(),
+        name='feedback_success',
+    ),
+    # Расчёт стоимости
+    path(
+        'estimate/',
+        views.EstimateRequestView.as_view(),
+        name='estimate_request',
+    ),
+    path(
+        'estimate/success/',
+        views.EstimateSuccessView.as_view(),
+        name='estimate_success',
+    ),
 ]

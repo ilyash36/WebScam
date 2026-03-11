@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="utf-8"></head>
+<body style="font-family: Georgia, serif; background: #fafafa; padding: 20px;">
+  <div style="max-width: 500px; margin: 0 auto; background: #fff; border: 1px solid #e0d5b0; border-radius: 12px; padding: 32px;">
+    <h2 style="color: #0a0a0a; margin-top: 0;">Chernyavskiy A-Tech</h2>
+    <p>Здравствуйте, {{ client.first_name }}!</p>
+    <p>Ваш код для входа в личный кабинет:</p>
+    <p style="text-align: center; margin: 24px 0;">
+      <span style="display: inline-block; background: #0a0a0a; color: #d4af37;
+                   font-size: 32px; letter-spacing: 8px; padding: 12px 32px;
+                   border-radius: 8px; font-family: monospace;">
+        {{ code }}
+      </span>
+    </p>
+    <p style="color: #666; font-size: 14px;">Код действителен 10 минут.</p>
+    <p style="color: #999; font-size: 12px; margin-top: 24px;">
+      Если вы не запрашивали вход, просто проигнорируйте это письмо.
+    </p>
+  </div>
+</body>
+</html>

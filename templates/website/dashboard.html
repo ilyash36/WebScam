@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}Личный кабинет - Автосервис{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Личный кабинет</h1>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="dashboard">
+
+            {# ===== Профиль ===== #}
+            <div class="dashboard-section">
+                <h2>Профиль</h2>
+                <div class="profile-card">
+                    <div class="profile-field">
+                        <span class="profile-label">Имя</span>
+                        <span class="profile-value">{{ client.first_name }}</span>
+                    </div>
+                    {% if client.last_name %}
+                    <div class="profile-field">
+                        <span class="profile-label">Фамилия</span>
+                        <span class="profile-value">{{ client.last_name }}</span>
+                    </div>
+                    {% endif %}
+                    <div class="profile-field">
+                        <span class="profile-label">Телефон</span>
+                        <span class="profile-value">{{ client.phone }}</span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="profile-label">Email</span>
+                        <span class="profile-value">{{ client.email }}</span>
+                    </div>
+                </div>
+            </div>
+
+            {# ===== Автомобили ===== #}
+            <div class="dashboard-section">
+                <h2>Мои автомобили</h2>
+                {% if vehicles %}
+                <div class="vehicle-cards">
+                    {% for v in vehicles %}
+                    <div class="vehicle-card">
+                        <div class="vehicle-card-header">
+                            <strong>{{ v.brand }} {{ v.model }}</strong>
+                            {% if v.year %}<span class="vehicle-year">{{ v.year }} г.</span>{% endif %}
+                        </div>
+                        <div class="vehicle-card-body">
+                            {% if v.vin %}
+                            <div class="vehicle-detail">
+                                <span class="detail-label">VIN</span>
+                                <span class="detail-value">{{ v.vin }}</span>
+                            </div>
+                            {% endif %}
+                            {% if v.license_plate %}
+                            <div class="vehicle-detail">
+                                <span class="detail-label">Госномер</span>
+                                <span class="detail-value">{{ v.license_plate }}</span>
+                            </div>
+                            {% endif %}
+                            {% if v.color %}
+                            <div class="vehicle-detail">
+                                <span class="detail-label">Цвет</span>
+                                <span class="detail-value">{{ v.color }}</span>
+                            </div>
+                            {% endif %}
+                            {% if v.mileage %}
+                            <div class="vehicle-detail">
+                                <span class="detail-label">Пробег</span>
+                                <span class="detail-value">{{ v.mileage|floatformat:0 }} км</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="empty-state">Автомобили не добавлены.</p>
+                {% endif %}
+            </div>
+
+            {# ===== Заявки ===== #}
+            <div class="dashboard-section">
+                <h2>Мои заявки</h2>
+                {% if bookings %}
+                <div class="booking-cards">
+                    {% for b in bookings %}
+                    <div class="booking-card booking-status-{{ b.status }}">
+                        <div class="booking-card-header">
+                            <span class="booking-date">{{ b.created_at|date:"d.m.Y H:i" }}</span>
+                            <span class="booking-status-badge">{{ b.get_status_display }}</span>
+                        </div>
+                        <div class="booking-card-body">
+                            <div class="booking-vehicle">{{ b.vehicle.brand }} {{ b.vehicle.model }}</div>
+                            {% if b.message %}
+                            <div class="booking-message">{{ b.message }}</div>
+                            {% endif %}
+                            {% if b.vehicle_engine_power %}
+                            <div class="booking-detail">Мощность: {{ b.vehicle_engine_power }} л.с.</div>
+                            {% endif %}
+                            {% if b.vehicle_passport_number %}
+                            <div class="booking-detail">ПТС: {{ b.vehicle_passport_number }}</div>
+                            {% endif %}
+                            {% if b.notes %}
+                            <div class="booking-notes"><strong>Заметки мастера:</strong> {{ b.notes }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="empty-state">Заявок пока нет.</p>
+                {% endif %}
+            </div>
+
+            <div class="dashboard-actions">
+                <a href="{% url 'website:booking' %}" class="btn btn-primary">Записаться</a>
+                <a href="{% url 'website:logout' %}" class="btn btn-secondary">Выйти</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

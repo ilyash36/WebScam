@@ -6,6 +6,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+# Брендинг админ-панели Chernyavskiy A-Tech
+admin.site.site_header = "Chernyavskiy A-Tech"
+admin.site.site_title = "Chernyavskiy A-Tech"
+admin.site.index_title = "Панель управления"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.website.urls')),
