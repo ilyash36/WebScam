@@ -52,10 +52,10 @@ class BookingRequest(BaseModel):
         verbose_name="Паспорт ТС №",
     )
     vehicle_engine_volume = models.CharField(
-        max_length=10,
+        max_length=12,
         blank=True,
         default='',
-        verbose_name="Объём двигателя, куб.см",
+        verbose_name="Объём двигателя, л",
     )
     vehicle_engine_power = models.CharField(
         max_length=30,

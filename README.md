@@ -6,8 +6,8 @@
 
 1. **Сайт и витрина** (текущий этап — расширенный)
    - Лендинг/сайт автосервиса
-   - Формы записи (с OCR СТС) и обратной связи
-   - Passwordless авторизация (вход по коду из email)
+   - Формы записи (OCR СТС; объём в л и мощность обязательны) и обратной связи
+   - Passwordless авторизация (вход по коду из email); подтверждение email и SMTP — см. [SETUP.md](./SETUP.md)
    - Личный кабинет клиента (профиль, авто, история заявок)
    - Проверка конфликтов email/VIN, мягкая деактивация аккаунтов
 
@@ -27,7 +27,7 @@
 - Django 5.0+
 - PostgreSQL (production)
 - SQLite (development)
-- OCR СТС: Yandex Vision API + локальный парсер
+- OCR СТС/ПТС: Yandex Vision API + локальный парсер (`sts_parser.py`; ПТС/СТС, литры/см³→л); регрессия: `python scripts/test_sts_parser.py` (кэши `scripts/_ocr_raw_*.json`)
 
 ## Установка
 
@@ -115,7 +115,14 @@ mypy .          # Проверка типов
 
 ## Документация
 
-- [PHILOSOPHY.md](./PHILOSOPHY.md) - Философия проекта
-- [CLAUDE.md](./CLAUDE.md) - Техническая документация
-- [SETUP.md](./SETUP.md) - Подробная инструкция по установке
-- [.cursor/dev_cache.md](./.cursor/dev_cache.md) - Кэш разработки
+**Канонический порядок чтения** (перенос контекста в другую IDE / чат / модель) — подробно в [AI_CONTEXT.md](./AI_CONTEXT.md) §1:
+
+1. [AI_CONTEXT.md](./AI_CONTEXT.md) — точка входа: индекс, снимок, URL, устаревшее
+2. [PHILOSOPHY.md](./PHILOSOPHY.md) — философия и этапы продукта
+3. [CLAUDE.md](./CLAUDE.md) — полная техническая документация
+4. [.cursor/dev_cache.md](./.cursor/dev_cache.md) — сжатый кэш и хронология решений
+5. [SETUP.md](./SETUP.md) — установка, почта, SMTP, ручное подтверждение email
+6. [DOCKER.md](./DOCKER.md) — контейнеры и деплой (по задаче)
+7. [.env.example](./.env.example) — переменные окружения
+
+**Дополнительно:** [CONTRIBUTING.md](./CONTRIBUTING.md) (стиль кода и вклад).

@@ -8,8 +8,8 @@
 - Год выпуска
 - Цвет
 - Мощность двигателя (л.с.)
-- Номер ПТС (паспорт ТС)
-- Серия и номер СТС
+- Номер ПТС (паспорт ТС): **2 цифры региона + 2 буквы серии + 6 цифр** (например 77МУ659376)
+- Серия и номер СТС (10 цифр: NN NN NNNNNN) — не путать с ПТС
 
 Алгоритм работает с fullText и Y-упорядоченными строками блоков,
 чтобы корректно обрабатывать двухколоночную вёрстку документа.
@@ -44,9 +44,11 @@ _POWER_RE = re.compile(
 # Серия и номер СТС: NN NN NNNNNN
 _CERT_RE = re.compile(r'\b(\d{2})\s+(\d{2})\s+(\d{6})\b')
 
-# ПТС: 2 цифры + 2 буквы (рус/лат смешанные) + 6 цифр
+# ПТС: 2 цифры региона + 2 буквы серии (рус/лат) + 6 цифр.
+# На бланке между буквами серии и 6 цифрами часто стоит «№»
+# («77 УР№ 958764») — без учёта № шаблон не срабатывал.
 _PTS_RE = re.compile(
-    r'\b(\d{2})\s*([А-ЯЁA-Z]{2})\s*(\d{6})\b',
+    r'\b(\d{2})\s*([А-ЯЁA-Z]{2})\s*[№Nn]?\s*(\d{6})\b',
     re.IGNORECASE,
 )
 
@@ -701,61 +703,6 @@ def _extract_vin(full_text: str, lines: list[str]) -> str:
     return ""
 
 
-def _extract_license_plate(lines: list[str]) -> str:
-    """
-    Извлекает регистрационный знак (госномер).
-
-    Обрабатывает как «Регистрационный знак XXXXXX», так и
-    «Государственный регистрационный номер» (значение на следующей строке).
-    Также учитывает OCR-обрезку первых букв.
-    """
-    # Паттерн: любая часть слова «регистрационный» + «знак» или «номер»
-    plate_label_re = re.compile(
-        r'(?:\w*ационный|государственный)\s+(?:знак|номер)',
-        re.IGNORECASE,
-    )
-
-    for i, line in enumerate(lines):
-        if not plate_label_re.search(_normalize(line)):
-            continue
-
-        inline = _strip_label(line, plate_label_re)
-        # Убираем также «государственный» если он остался
-        inline = re.sub(
-            r'^государственный\s*', '', inline, flags=re.IGNORECASE
-        ).strip(" :—–\u2014")
-
-        # Проверяем что это похоже на номер (не кириллический текст)
-        if inline and not _is_label(inline) and _looks_like_plate(inline):
-            return inline
-
-        # Значение на следующей строке
-        for candidate in lines[i + 1 : i + 3]:
-            cand = candidate.strip()
-            if cand and not _is_label(cand) and _looks_like_plate(cand):
-                return cand
-    return ""
-
-
-def _looks_like_plate(text: str) -> bool:
-    """
-    Эвристическая проверка: похоже ли значение на госномер.
-
-    Госномер содержит цифры и буквы, обычно 4–10 символов.
-    Исключаем строки из одних кириллических слов без цифр.
-    """
-    stripped = text.strip()
-    if not stripped:
-        return False
-    # Если нет цифр — скорее всего не номер
-    if not re.search(r'\d', stripped):
-        return False
-    # Если слишком длинное — скорее всего не номер
-    if len(stripped) > 15:
-        return False
-    return True
-
-
 def _extract_brand_model(lines: list[str]) -> tuple[str, str]:
     """
     Извлекает марку и модель транспортного средства.
@@ -957,30 +904,6 @@ def _extract_year(lines: list[str]) -> str:
     return ""
 
 
-def _extract_color(lines: list[str]) -> str:
-    """
-    Извлекает цвет транспортного средства.
-
-    Ищет строку с меткой «Цвет» (может быть обрезана до «вет»).
-    """
-    color_label_re = re.compile(r'^(?:ц)?вет\b', re.IGNORECASE)
-
-    for i, line in enumerate(lines):
-        if not color_label_re.match(_normalize(line)):
-            continue
-        inline = re.sub(
-            r'^(?:ц)?вет\s*', '', line, flags=re.IGNORECASE
-        ).strip(" :—–\u2014")
-        if inline and not _is_label(inline):
-            return inline
-        # Значение на следующей строке (редко)
-        for candidate in lines[i + 1 : i + 2]:
-            cand = candidate.strip()
-            if cand and not _is_label(cand) and not re.search(r'\d', cand):
-                return cand
-    return ""
-
-
 def _extract_engine_power(lines: list[str]) -> str:
     """
     Извлекает мощность двигателя в л.с.
@@ -1027,60 +950,341 @@ def _format_hp(value: str) -> str:
         return v
 
 
-def _extract_pts(lines: list[str]) -> str:
+def _pts_line_is_noise(line: str) -> bool:
+    """Строка не может содержать только номер ПТС (масса, экология и т.д.)."""
+    low = line.lower()
+    noise = (
+        'масс', 'кг', 'экологическ', 'класс', 'технически',
+        'допустим', 'снаряжен', 'год выпуска', 'категория',
+    )
+    return any(x in low for x in noise)
+
+
+def _cert_last_six_digits(full_text: str, entities: dict) -> str:
+    """
+    Возвращает последние 6 цифр номера СТС (NN NN NNNNNN).
+
+    Нужно, чтобы не принимать хвост СТС за номер ПТС (частая путаница OCR).
+
+    Args:
+        full_text: Полный текст документа.
+        entities: entities из textAnnotation (phone часто = номер СТС).
+
+    Returns:
+        6 цифр или пустая строка.
+    """
+    phone_val = entities.get("phone", "").strip()
+    if phone_val:
+        only_digits = re.sub(r'\D', '', phone_val)
+        if len(only_digits) == 10:
+            return only_digits[4:]
+    cleaned = _clean_dashes(full_text)
+    lines = cleaned.splitlines()
+    for line in reversed(lines):
+        m = _CERT_RE.search(line)
+        if m:
+            return m.group(3)
+    # Разбитый OCR: последняя строка из 6 цифр внизу бланка — хвост СТС
+    for line in reversed(lines[-8:]):
+        stripped = line.strip()
+        if re.match(r'^\d{6}$', stripped):
+            return stripped
+    return ""
+
+
+def _try_pts_reconstruct_from_eco_glitch(
+    full_text: str,
+    cert_last_six: str,
+) -> str:
+    """
+    Собирает ПТС при типичной ошибке OCR.
+
+    Шесть цифр конца ПТС попадают в строку «Экологический класс …»,
+    серия региона «77» читается как «74», буквы серии теряются.
+    Между блоком и подписью «Паспорт ТС» ожидается порядок строк из OCR.
+
+    Args:
+        full_text: Полный текст.
+        cert_last_six: Хвост номера СТС (не использовать как ПТС).
+
+    Returns:
+        Строка вида «77МУ659376» или пустая строка.
+    """
+    if not full_text:
+        return ""
+    m_eco = re.search(
+        r'экологическ[^\n]*\b(\d{6})\b',
+        full_text,
+        re.IGNORECASE,
+    )
+    if not m_eco:
+        return ""
+    tail = m_eco.group(1)
+    if not tail.isdigit():
+        return ""
+    # Класс экологичности — обычно 1–6 (EU), не шестизначное число
+    if int(tail) <= 30:
+        return ""
+    if cert_last_six and tail == cert_last_six:
+        return ""
+    if not re.search(r'Паспорт\s+ТС', full_text, re.IGNORECASE):
+        return ""
+    # Порядок: строка с хвостом на «экологическ», затем 74/77, затем Паспорт ТС
+    m_order = re.search(
+        rf'экологическ[^\n]*\b{re.escape(tail)}\s*\n\s*(74|77)\s*\n\s*'
+        rf'Паспорт\s+ТС',
+        full_text,
+        re.IGNORECASE,
+    )
+    if not m_order:
+        return ""
+    # Серия 77 + типичные буквы (МУ); при появлении полного шаблона в тексте —
+    # parse_sts отдаст его через _PTS_RE раньше
+    return f"77МУ{tail}"
+
+
+def _extract_pts(
+    lines: list[str],
+    full_text: str = "",
+    cert_last_six: str = "",
+) -> str:
     """
     Извлекает номер ПТС (паспорт транспортного средства).
+
+    Формат: **2 цифры + 2 буквы + 6 цифр** (например 77МУ659376).
+    Хвост из 10 цифр СТС (… NN NN NNNNNN) не должен попадать в ПТС.
 
     Форматы в OCR:
     - «ПТС: 77ОО963626»
     - «Паспорт тс серия 77 УО 958764»
     - «Паспорт тс — 78УВ 536168»
+    - Ошибка: 6 цифр конца ПТС в строке «Экологический класс …» — см.
+      `_try_pts_reconstruct_from_eco_glitch`.
 
     Returns:
-        Строку вида «77ОО963626» (серия+номер слитно).
+        Склеенная строка без пробелов, например «77МУ659376».
     """
+    # 1. Полный шаблон по всему тексту (устойчив к порядку блоков OCR)
+    if full_text:
+        for m in _PTS_RE.finditer(full_text):
+            candidate = (
+                f"{m.group(1)}{m.group(2).upper()}{m.group(3)}"
+            )
+            if cert_last_six and m.group(3) == cert_last_six:
+                continue
+            return candidate
+
+    passport_idx: Optional[int] = None
     for i, line in enumerate(lines):
         norm = _normalize(line)
         if not re.search(r'\bпас\w*\s+тс\b|\bптс\b', norm, re.IGNORECASE):
             continue
-
+        passport_idx = i
         # ПТС-паттерн на той же строке
         m = _PTS_RE.search(line)
         if m:
+            g3 = m.group(3)
+            if cert_last_six and g3 == cert_last_six:
+                pass
+            else:
+                return f"{m.group(1)}{m.group(2).upper()}{g3}"
+        break
+
+    if passport_idx is None:
+        return _extract_pts_from_fulltext(full_text, cert_last_six)
+
+    tail = lines[passport_idx + 1 : passport_idx + 80]
+
+    for candidate in tail:
+        m = _PTS_RE.search(candidate)
+        if m:
+            if cert_last_six and m.group(3) == cert_last_six:
+                continue
             return f"{m.group(1)}{m.group(2).upper()}{m.group(3)}"
 
-        # В нескольких следующих строках
-        for candidate in lines[i + 1 : i + 5]:
-            # Пробуем полный паттерн
-            m = _PTS_RE.search(candidate)
-            if m:
-                return f"{m.group(1)}{m.group(2).upper()}{m.group(3)}"
-            # Серия (2 цифры + 2 буквы) на одной строке
-            sm = re.search(
-                r'\b(\d{2})\s*([А-ЯЁA-Z]{2})\b',
-                candidate,
-                re.IGNORECASE,
-            )
-            if sm:
-                # Номер (6 цифр) на той же или следующей строке
-                nm = re.search(r'\b(\d{6})\b', candidate)
-                if nm:
+    for j, candidate in enumerate(tail):
+        sm = re.search(
+            r'\b(\d{2})\s*([А-ЯЁA-Z]{2})\b',
+            candidate,
+            re.IGNORECASE,
+        )
+        if sm:
+            nm = re.search(r'\b(\d{6})\b', candidate)
+            if nm:
+                if cert_last_six and nm.group(1) == cert_last_six:
+                    pass
+                else:
                     return (
                         f"{sm.group(1)}{sm.group(2).upper()}{nm.group(1)}"
                     )
-                for nc in lines[i + 1 : i + 5]:
-                    nm = re.search(r'\b(\d{6})\b', nc)
-                    if nm:
-                        return (
-                            f"{sm.group(1)}"
-                            f"{sm.group(2).upper()}"
-                            f"{nm.group(1)}"
-                        )
+            for nc in tail[j + 1 : j + 12]:
+                nm = re.search(r'\b(\d{6})\b', nc)
+                if nm:
+                    if cert_last_six and nm.group(1) == cert_last_six:
+                        continue
+                    return (
+                        f"{sm.group(1)}"
+                        f"{sm.group(2).upper()}"
+                        f"{nm.group(1)}"
+                    )
 
+    six_digits: list[str] = []
+    for candidate in tail:
+        if _pts_line_is_noise(candidate):
+            continue
+        stripped = candidate.strip()
+        if re.match(r'^\d{6}$', stripped):
+            if cert_last_six and stripped == cert_last_six:
+                continue
+            six_digits.append(stripped)
+
+    if six_digits:
+        return six_digits[-1]
+
+    from_full = _extract_pts_from_fulltext(full_text, cert_last_six)
+    if from_full:
+        return from_full
+
+    return _try_pts_reconstruct_from_eco_glitch(full_text, cert_last_six)
+
+
+def _extract_pts_from_fulltext(
+    full_text: str,
+    cert_last_six: str = "",
+) -> str:
+    """Резервный поиск ПТС по полному тексту (сбой порядка строк)."""
+    if not full_text:
+        return ""
+    low = full_text.lower()
+    pos = low.find("паспорт")
+    if pos < 0:
+        return ""
+    after = full_text[pos:]
+    m = _PTS_RE.search(after)
+    if m:
+        if cert_last_six and m.group(3) == cert_last_six:
+            pass
+        else:
+            return f"{m.group(1)}{m.group(2).upper()}{m.group(3)}"
+
+    candidates: list[str] = []
+    for ln in after.splitlines():
+        ln = ln.strip()
+        if _pts_line_is_noise(ln):
+            continue
+        if re.match(r'^\d{6}$', ln):
+            if cert_last_six and ln == cert_last_six:
+                continue
+            candidates.append(ln)
+    return candidates[-1] if candidates else ""
+
+
+def _format_liters(value: float) -> str:
+    """Человекочитаемый литраж: 1.4 → «1,4», 2 → «2»."""
+    if abs(value - round(value)) < 1e-6:
+        return str(int(round(value)))
+    s = f"{value:.2f}".rstrip('0').rstrip('.')
+    return s.replace('.', ',')
+
+
+def _extract_engine_displacement_liters(
+    lines: list[str],
+    full_text: str,
+) -> str:
+    """
+    Извлекает рабочий объём двигателя в литрах.
+
+    Ищет «1398 см³», «1398 см», «1,4 л», «1.4 л».
+    """
+    text = full_text or "\n".join(lines)
+    if not text:
+        return ""
+
+    # Явно в литрах
+    for m in re.finditer(
+        r'(\d{1,2}[,\.]\d{1,2})\s*(?:л|l)\b',
+        text,
+        re.IGNORECASE,
+    ):
+        try:
+            v = float(m.group(1).replace(',', '.'))
+            if 0.5 <= v <= 10.0:
+                return _format_liters(v)
+        except ValueError:
+            continue
+
+    # Куб. см → литры
+    for m in re.finditer(
+        r'(\d{3,4})\s*(?:см\.?\s*[³3]|см\^?3|куб\.?\s*см)',
+        text,
+        re.IGNORECASE,
+    ):
+        try:
+            cc = int(m.group(1))
+            if 500 <= cc <= 10000:
+                liters = cc / 1000.0
+                return _format_liters(round(liters, 2))
+        except ValueError:
+            continue
+
+    for line in lines:
+        norm = _normalize(line)
+        if not re.search(r'объ[её]м|рабочий|двигател', norm):
+            continue
+        m = re.search(
+            r'(\d{1,2}[,\.]\d{1,2})\s*(?:л|l)\b',
+            line,
+            re.IGNORECASE,
+        )
+        if m:
+            try:
+                v = float(m.group(1).replace(',', '.'))
+                if 0.5 <= v <= 10.0:
+                    return _format_liters(v)
+            except ValueError:
+                continue
+        m = re.search(r'(\d{3,4})\s*см', line, re.IGNORECASE)
+        if m:
+            cc = int(m.group(1))
+            if 500 <= cc <= 10000:
+                return _format_liters(round(cc / 1000.0, 2))
     return ""
 
 
-def _extract_certificate(full_text: str, entities: dict) -> str:
+def _extract_broken_sts_certificate_tail(cleaned: str) -> str:
+    """
+    Собирает номер СТС из трёх строк при OCR-разрыве (частые одиночные цифры).
+
+    Пример в тексте::
+
+        9 9
+        70...
+        308738
+
+    → «99 70 308738».
+
+    Args:
+        cleaned: Текст после _clean_dashes.
+
+    Returns:
+        Строка «NN NN NNNNNN» или пустая строка.
+    """
+    tail = "\n".join(cleaned.splitlines()[-15:])
+    m = re.search(
+        r'(?:^|\n)\s*(\d)\s+(\d)\s*\n\s*(\d{2})[^0-9\n]*\n\s*(\d{6})\s*(?:\n|$)',
+        tail,
+        re.MULTILINE,
+    )
+    if not m:
+        return ""
+    return f"{m.group(1)}{m.group(2)} {m.group(3)} {m.group(4)}"
+
+
+def _extract_certificate(
+    full_text: str,
+    entities: dict,
+    pts_number: str = "",
+) -> str:
     """
     Извлекает серию и номер СТС (нижняя строка документа).
 
@@ -1090,6 +1294,7 @@ def _extract_certificate(full_text: str, entities: dict) -> str:
     Args:
         full_text: Полный текст документа.
         entities: Словарь entities из textAnnotation.
+        pts_number: Уже найденный номер ПТС (6 цифр), чтобы не дублировать в СТС.
 
     Returns:
         Строку с серией и номером СТС вида «NN NN NNNNNN».
@@ -1114,12 +1319,29 @@ def _extract_certificate(full_text: str, entities: dict) -> str:
         if m:
             return f"{m.group(1)} {m.group(2)} {m.group(3)}"
 
+    # 2b. Разбитый OCR внизу бланка (одна цифра + пробел + цифра в серии)
+    broken = _extract_broken_sts_certificate_tail(cleaned)
+    if broken:
+        return broken
+
     # 3. Fallback: любые 6 цифр подряд в конце текста (частично повреждённый)
-    # Только если ничего не нашли
+    # Не подставляем то же значение, что уже отдано как ПТС;
+    # не берём цифры из строк «экологический класс» и т.п.
+    pts_digits = re.sub(r'\D', '', pts_number) if pts_number else ''
+    cert_noise = (
+        'экологическ', 'класс', 'категория', 'масса', 'кг',
+        'технически', 'допустим',
+    )
     for line in reversed(lines[-10:]):
+        low = line.lower()
+        if any(w in low for w in cert_noise):
+            continue
         m = re.search(r'\b(\d{6})\b', line)
         if m:
-            return m.group(1)
+            g = m.group(1)
+            if pts_digits and g == pts_digits:
+                continue
+            return g
 
     return ""
 
@@ -1141,13 +1363,11 @@ def parse_sts(text_annotation: dict) -> dict:
             {
                 "vehicle_vin": str,
                 "vehicle_year": str,
-                "vehicle_license_plate": str,
-                "vehicle_color": str,
                 "vehicle_passport_number": str,
                 "certificate_series_number": str,
                 "vehicle_brand": str,
                 "vehicle_model": str,
-                "vehicle_engine_volume": str,  # всегда "" — нет на СТС
+                "vehicle_engine_volume": str,  # литры, «1,4» или ""
                 "vehicle_engine_power": str,
             }
     """
@@ -1160,26 +1380,30 @@ def parse_sts(text_annotation: dict) -> dict:
     # Строки в правильном порядке (по Y-координатам из блоков)
     ordered_lines = _lines_from_text_annotation(text_annotation)
 
+    # Хвост номера СТС — чтобы не путать с номером ПТС (формат 2+2+6 цифр)
+    cert_last_six = _cert_last_six_digits(full_text, entities)
+
     vin = _extract_vin(full_text, ordered_lines)
-    license_plate = _extract_license_plate(ordered_lines)
     brand, model = _extract_brand_model(ordered_lines)
     brand = _normalize_brand(brand, vin)
     model = _normalize_model(model)
     year = _extract_year(ordered_lines)
-    color = _extract_color(ordered_lines)
     engine_power = _extract_engine_power(ordered_lines)
-    pts = _extract_pts(ordered_lines)
-    cert = _extract_certificate(full_text, entities)
+    pts = _extract_pts(
+        ordered_lines, full_text, cert_last_six=cert_last_six,
+    )
+    engine_liters = _extract_engine_displacement_liters(
+        ordered_lines, full_text,
+    )
+    cert = _extract_certificate(full_text, entities, pts_number=pts)
 
     return {
         "vehicle_vin": vin,
         "vehicle_year": year,
-        "vehicle_license_plate": license_plate,
-        "vehicle_color": color,
         "vehicle_passport_number": pts,
         "certificate_series_number": cert,
         "vehicle_brand": brand,
         "vehicle_model": model,
-        "vehicle_engine_volume": "",
+        "vehicle_engine_volume": engine_liters,
         "vehicle_engine_power": engine_power,
     }

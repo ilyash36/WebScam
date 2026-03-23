@@ -30,7 +30,12 @@ class ClientAdmin(admin.ModelAdmin):
         'phone',
         'email',
     ]
-    readonly_fields = ['created_at', 'updated_at']
+    readonly_fields = [
+        'created_at',
+        'updated_at',
+        'auth_code',
+        'auth_code_created_at',
+    ]
     actions = ['deactivate_clients', 'activate_clients']
 
     fieldsets = (
@@ -51,6 +56,16 @@ class ClientAdmin(admin.ModelAdmin):
         }),
         ('Статус', {
             'fields': ('is_active', 'is_verified'),
+        }),
+        ('Вход по коду из email', {
+            'fields': (
+                'auth_code',
+                'auth_code_created_at',
+            ),
+            'description': (
+                'Текущий код для входа (хранится в БД). '
+                'При console backend тот же код дублируется в «письме» в терминале runserver.'
+            ),
         }),
         ('Дополнительно', {
             'fields': ('notes', 'created_at', 'updated_at'),

@@ -44,9 +44,13 @@
             <form method="post" class="booking-form" id="bookingForm" {% if form.errors or client %}style="display:block"{% else %}style="display:none"{% endif %}>
                 {% csrf_token %}
 
+                {% if form.non_field_errors %}
+                    <div class="error form-nonfield-errors">{{ form.non_field_errors }}</div>
+                {% endif %}
+
                 <h2>Ваши данные</h2>
                 <div class="form-group">
-                    <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }} *</label>
+                    <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
                     {{ form.first_name }}
                     {% if form.first_name.errors %}
                         <div class="error">{{ form.first_name.errors }}</div>
@@ -54,7 +58,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }} *</label>
+                    <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
                     {{ form.phone }}
                     {% if form.phone.errors %}
                         <div class="error">{{ form.phone.errors }}</div>
@@ -62,7 +66,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }} *</label>
+                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
                     {{ form.email }}
                     {% if form.email.errors %}
                         <div class="error">{{ form.email.errors }}</div>
@@ -72,13 +76,19 @@
                 <h2>Данные автомобиля</h2>
                 <div class="form-group sts-upload-group">
                     <input type="file" id="stsFileInput" accept="image/*" capture="environment" style="display:none">
-                    <button type="button" class="btn btn-secondary" id="stsUploadBtn">
-                        Загрузить фото СТС
-                    </button>
+                    <div class="sts-upload-row">
+                        <button type="button" class="btn btn-secondary" id="stsUploadBtn">
+                            Загрузить фото СТС
+                        </button>
+                        <p class="sts-upload-help">
+                            После загрузки фото данные об автомобиле будут заполнены автоматически.
+                            Пожалуйста, проверьте и при необходимости исправьте их.
+                        </p>
+                    </div>
                     <span class="sts-upload-status" id="stsUploadStatus"></span>
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.vehicle_brand.id_for_label }}">{{ form.vehicle_brand.label }} *</label>
+                    <label for="{{ form.vehicle_brand.id_for_label }}">{{ form.vehicle_brand.label }}</label>
                     {{ form.vehicle_brand }}
                     {% if form.vehicle_brand.errors %}
                         <div class="error">{{ form.vehicle_brand.errors }}</div>
@@ -86,7 +96,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="{{ form.vehicle_model.id_for_label }}">{{ form.vehicle_model.label }} *</label>
+                    <label for="{{ form.vehicle_model.id_for_label }}">{{ form.vehicle_model.label }}</label>
                     {{ form.vehicle_model }}
                     {% if form.vehicle_model.errors %}
                         <div class="error">{{ form.vehicle_model.errors }}</div>
@@ -107,24 +117,6 @@
                         {{ form.vehicle_vin }}
                         {% if form.vehicle_vin.errors %}
                             <div class="error">{{ form.vehicle_vin.errors }}</div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="{{ form.vehicle_license_plate.id_for_label }}">{{ form.vehicle_license_plate.label }}</label>
-                        {{ form.vehicle_license_plate }}
-                        {% if form.vehicle_license_plate.errors %}
-                            <div class="error">{{ form.vehicle_license_plate.errors }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="{{ form.vehicle_color.id_for_label }}">{{ form.vehicle_color.label }}</label>
-                        {{ form.vehicle_color }}
-                        {% if form.vehicle_color.errors %}
-                            <div class="error">{{ form.vehicle_color.errors }}</div>
                         {% endif %}
                     </div>
                 </div>
@@ -357,7 +349,7 @@
 
     var ocrFields = [
         'vehicle_brand', 'vehicle_model', 'vehicle_year', 'vehicle_vin',
-        'vehicle_license_plate', 'vehicle_color', 'vehicle_passport_number',
+        'vehicle_passport_number',
         'vehicle_engine_volume', 'vehicle_engine_power'
     ];
 

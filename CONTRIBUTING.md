@@ -2,6 +2,16 @@
 
 Спасибо за интерес к проекту! Это руководство поможет вам внести вклад в развитие проекта.
 
+**Канонический порядок чтения документации** (подробно в [AI_CONTEXT.md](./AI_CONTEXT.md) §1):
+
+1. [AI_CONTEXT.md](./AI_CONTEXT.md)
+2. [PHILOSOPHY.md](./PHILOSOPHY.md)
+3. [CLAUDE.md](./CLAUDE.md)
+4. [.cursor/dev_cache.md](./.cursor/dev_cache.md)
+5. [SETUP.md](./SETUP.md)
+6. [DOCKER.md](./DOCKER.md) — по задаче
+7. [.env.example](./.env.example)
+
 ## Стандарты кода
 
 ### PEP 8

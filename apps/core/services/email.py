@@ -1,11 +1,12 @@
 """
 Email-сервис: отправка писем клиентам.
 
-В development: console.EmailBackend (письма выводятся в терминал).
-В production: SMTP через настройки EMAIL_* в .env.
+В development: по умолчанию console.EmailBackend (письма в консоль).
+Для реальной отправки: EMAIL_BACKEND=smtp + EMAIL_* в .env.
+В production: SMTP через настройки EMAIL_* и DEFAULT_FROM_EMAIL в .env.
 """
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 from django.conf import settings
 from django.core.mail import send_mail
@@ -20,6 +21,30 @@ logger = logging.getLogger(__name__)
 DEFAULT_FROM_EMAIL = getattr(
     settings, 'DEFAULT_FROM_EMAIL', 'noreply@chernyavskiy-atech.ru'
 )
+
+
+def _base_url_for_email(request: Optional[object]) -> str:
+    """
+    Базовый URL для ссылок в письмах.
+
+    Приоритет: SITE_URL из настроек (reverse-proxy), иначе request, иначе localhost.
+
+    Args:
+        request: HTTP-запрос или None.
+
+    Returns:
+        URL без завершающего слэша.
+    """
+    site = getattr(settings, 'SITE_URL', '') or ''
+    site = site.strip().rstrip('/')
+    if site:
+        return site
+    if request is not None:
+        try:
+            return request.build_absolute_uri('/')[:-1]
+        except Exception:
+            pass
+    return 'http://127.0.0.1:8000'
 
 
 def _send(
@@ -78,13 +103,7 @@ def send_verification_email(
 
     token = client.generate_verification_token()
 
-    if request:
-        base_url = request.build_absolute_uri('/')[:-1]
-    else:
-        base_url = getattr(
-            settings, 'SITE_URL', 'http://127.0.0.1:8000'
-        )
-
+    base_url = _base_url_for_email(request)
     verify_url = f"{base_url}/verify-email/{token}/"
 
     html_body = render_to_string('email/verify_email.html', {

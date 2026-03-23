@@ -99,6 +99,9 @@
                             {% if b.message %}
                             <div class="booking-message">{{ b.message }}</div>
                             {% endif %}
+                            {% if b.vehicle_engine_volume %}
+                            <div class="booking-detail">Объём: {{ b.vehicle_engine_volume }} л</div>
+                            {% endif %}
                             {% if b.vehicle_engine_power %}
                             <div class="booking-detail">Мощность: {{ b.vehicle_engine_power }} л.с.</div>
                             {% endif %}

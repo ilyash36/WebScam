@@ -1,0 +1,4276 @@
+{
+  "result": {
+    "textAnnotation": {
+      "width": "960",
+      "height": "1280",
+      "blocks": [
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "272",
+                "y": "309"
+              },
+              {
+                "x": "272",
+                "y": "343"
+              },
+              {
+                "x": "687",
+                "y": "343"
+              },
+              {
+                "x": "687",
+                "y": "309"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "272",
+                    "y": "309"
+                  },
+                  {
+                    "x": "272",
+                    "y": "343"
+                  },
+                  {
+                    "x": "687",
+                    "y": "343"
+                  },
+                  {
+                    "x": "687",
+                    "y": "309"
+                  }
+                ]
+              },
+              "text": "РОССИЙСКАЯ ФЕДЕРАЦИЯ",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "272",
+                        "y": "313"
+                      },
+                      {
+                        "x": "272",
+                        "y": "347"
+                      },
+                      {
+                        "x": "480",
+                        "y": "347"
+                      },
+                      {
+                        "x": "480",
+                        "y": "313"
+                      }
+                    ]
+                  },
+                  "text": "РОССИЙСКАЯ",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "0",
+                      "length": "10"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "489",
+                        "y": "306"
+                      },
+                      {
+                        "x": "489",
+                        "y": "339"
+                      },
+                      {
+                        "x": "687",
+                        "y": "339"
+                      },
+                      {
+                        "x": "687",
+                        "y": "306"
+                      }
+                    ]
+                  },
+                  "text": "ФЕДЕРАЦИЯ",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "11",
+                      "length": "9"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "0",
+                  "length": "20"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "0",
+              "length": "20"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "216",
+                "y": "360"
+              },
+              {
+                "x": "216",
+                "y": "434"
+              },
+              {
+                "x": "762",
+                "y": "434"
+              },
+              {
+                "x": "762",
+                "y": "360"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "216",
+                    "y": "360"
+                  },
+                  {
+                    "x": "216",
+                    "y": "396"
+                  },
+                  {
+                    "x": "762",
+                    "y": "396"
+                  },
+                  {
+                    "x": "762",
+                    "y": "360"
+                  }
+                ]
+              },
+              "text": "СВИДЕТЕЛЬСТВО О РЕГИСТРАЦИИ ТС",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "216",
+                        "y": "366"
+                      },
+                      {
+                        "x": "216",
+                        "y": "400"
+                      },
+                      {
+                        "x": "454",
+                        "y": "400"
+                      },
+                      {
+                        "x": "454",
+                        "y": "366"
+                      }
+                    ]
+                  },
+                  "text": "СВИДЕТЕЛЬСТВО",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "21",
+                      "length": "13"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "463",
+                        "y": "365"
+                      },
+                      {
+                        "x": "463",
+                        "y": "393"
+                      },
+                      {
+                        "x": "488",
+                        "y": "393"
+                      },
+                      {
+                        "x": "488",
+                        "y": "365"
+                      }
+                    ]
+                  },
+                  "text": "О",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "35",
+                      "length": "1"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "495",
+                        "y": "359"
+                      },
+                      {
+                        "x": "495",
+                        "y": "392"
+                      },
+                      {
+                        "x": "701",
+                        "y": "392"
+                      },
+                      {
+                        "x": "701",
+                        "y": "359"
+                      }
+                    ]
+                  },
+                  "text": "РЕГИСТРАЦИИ",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "37",
+                      "length": "11"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "709",
+                        "y": "357"
+                      },
+                      {
+                        "x": "709",
+                        "y": "385"
+                      },
+                      {
+                        "x": "762",
+                        "y": "385"
+                      },
+                      {
+                        "x": "762",
+                        "y": "357"
+                      }
+                    ]
+                  },
+                  "text": "ТС",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "49",
+                      "length": "2"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "21",
+                  "length": "30"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            },
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "253",
+                    "y": "402"
+                  },
+                  {
+                    "x": "253",
+                    "y": "434"
+                  },
+                  {
+                    "x": "720",
+                    "y": "434"
+                  },
+                  {
+                    "x": "720",
+                    "y": "402"
+                  }
+                ]
+              },
+              "text": "CERTIFICAT D’IMMATRICULATION",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "253",
+                        "y": "407"
+                      },
+                      {
+                        "x": "253",
+                        "y": "438"
+                      },
+                      {
+                        "x": "419",
+                        "y": "438"
+                      },
+                      {
+                        "x": "419",
+                        "y": "407"
+                      }
+                    ]
+                  },
+                  "text": "CERTIFICAT",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "52",
+                      "length": "10"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "427",
+                        "y": "400"
+                      },
+                      {
+                        "x": "427",
+                        "y": "434"
+                      },
+                      {
+                        "x": "720",
+                        "y": "434"
+                      },
+                      {
+                        "x": "720",
+                        "y": "400"
+                      }
+                    ]
+                  },
+                  "text": "D’IMMATRICULATION",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "63",
+                      "length": "17"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "52",
+                  "length": "28"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ky"
+            },
+            {
+              "languageCode": "en"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "21",
+              "length": "59"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "202",
+                "y": "450"
+              },
+              {
+                "x": "202",
+                "y": "486"
+              },
+              {
+                "x": "528",
+                "y": "486"
+              },
+              {
+                "x": "528",
+                "y": "450"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "202",
+                    "y": "450"
+                  },
+                  {
+                    "x": "202",
+                    "y": "486"
+                  },
+                  {
+                    "x": "528",
+                    "y": "486"
+                  },
+                  {
+                    "x": "528",
+                    "y": "450"
+                  }
+                ]
+              },
+              "text": "Регистрационный знак",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "202",
+                        "y": "461"
+                      },
+                      {
+                        "x": "202",
+                        "y": "487"
+                      },
+                      {
+                        "x": "449",
+                        "y": "487"
+                      },
+                      {
+                        "x": "449",
+                        "y": "461"
+                      }
+                    ]
+                  },
+                  "text": "Регистрационный",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "81",
+                      "length": "15"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "456",
+                        "y": "457"
+                      },
+                      {
+                        "x": "456",
+                        "y": "484"
+                      },
+                      {
+                        "x": "528",
+                        "y": "484"
+                      },
+                      {
+                        "x": "528",
+                        "y": "457"
+                      }
+                    ]
+                  },
+                  "text": "знак",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "97",
+                      "length": "4"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "81",
+                  "length": "20"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "81",
+              "length": "20"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "542",
+                "y": "450"
+              },
+              {
+                "x": "542",
+                "y": "486"
+              },
+              {
+                "x": "747",
+                "y": "486"
+              },
+              {
+                "x": "747",
+                "y": "450"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "542",
+                    "y": "450"
+                  },
+                  {
+                    "x": "542",
+                    "y": "486"
+                  },
+                  {
+                    "x": "747",
+                    "y": "486"
+                  },
+                  {
+                    "x": "747",
+                    "y": "450"
+                  }
+                ]
+              },
+              "text": "К787ЕТ136",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "542",
+                        "y": "447"
+                      },
+                      {
+                        "x": "542",
+                        "y": "479"
+                      },
+                      {
+                        "x": "747",
+                        "y": "479"
+                      },
+                      {
+                        "x": "747",
+                        "y": "447"
+                      }
+                    ]
+                  },
+                  "text": "К787ЕТ136",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "102",
+                      "length": "9"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "102",
+                  "length": "9"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "102",
+              "length": "9"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "205",
+                "y": "495"
+              },
+              {
+                "x": "205",
+                "y": "522"
+              },
+              {
+                "x": "686",
+                "y": "522"
+              },
+              {
+                "x": "686",
+                "y": "495"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "205",
+                    "y": "495"
+                  },
+                  {
+                    "x": "205",
+                    "y": "522"
+                  },
+                  {
+                    "x": "686",
+                    "y": "522"
+                  },
+                  {
+                    "x": "686",
+                    "y": "495"
+                  }
+                ]
+              },
+              "text": "Идентификационный номер (VIN)",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "205",
+                        "y": "497"
+                      },
+                      {
+                        "x": "205",
+                        "y": "525"
+                      },
+                      {
+                        "x": "493",
+                        "y": "525"
+                      },
+                      {
+                        "x": "493",
+                        "y": "497"
+                      }
+                    ]
+                  },
+                  "text": "Идентификационный",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "112",
+                      "length": "17"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "502",
+                        "y": "495"
+                      },
+                      {
+                        "x": "502",
+                        "y": "519"
+                      },
+                      {
+                        "x": "592",
+                        "y": "519"
+                      },
+                      {
+                        "x": "592",
+                        "y": "495"
+                      }
+                    ]
+                  },
+                  "text": "номер",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "130",
+                      "length": "5"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "599",
+                        "y": "493"
+                      },
+                      {
+                        "x": "599",
+                        "y": "516"
+                      },
+                      {
+                        "x": "686",
+                        "y": "516"
+                      },
+                      {
+                        "x": "686",
+                        "y": "493"
+                      }
+                    ]
+                  },
+                  "text": "(VIN)",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "136",
+                      "length": "5"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "112",
+                  "length": "29"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "112",
+              "length": "29"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "250",
+                "y": "525"
+              },
+              {
+                "x": "250",
+                "y": "542"
+              },
+              {
+                "x": "561",
+                "y": "542"
+              },
+              {
+                "x": "561",
+                "y": "525"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "250",
+                    "y": "531"
+                  },
+                  {
+                    "x": "250",
+                    "y": "542"
+                  },
+                  {
+                    "x": "316",
+                    "y": "542"
+                  },
+                  {
+                    "x": "316",
+                    "y": "531"
+                  }
+                ]
+              },
+              "text": "XTA",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "250",
+                        "y": "531"
+                      },
+                      {
+                        "x": "250",
+                        "y": "543"
+                      },
+                      {
+                        "x": "316",
+                        "y": "543"
+                      },
+                      {
+                        "x": "316",
+                        "y": "531"
+                      }
+                    ]
+                  },
+                  "text": "XTA",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "142",
+                      "length": "3"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "142",
+                  "length": "3"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            },
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "325",
+                    "y": "525"
+                  },
+                  {
+                    "x": "325",
+                    "y": "542"
+                  },
+                  {
+                    "x": "561",
+                    "y": "542"
+                  },
+                  {
+                    "x": "561",
+                    "y": "525"
+                  }
+                ]
+              },
+              "text": "17230E0256412",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "325",
+                        "y": "523"
+                      },
+                      {
+                        "x": "325",
+                        "y": "546"
+                      },
+                      {
+                        "x": "561",
+                        "y": "546"
+                      },
+                      {
+                        "x": "561",
+                        "y": "523"
+                      }
+                    ]
+                  },
+                  "text": "17230E0256412",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "146",
+                      "length": "13"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "146",
+                  "length": "13"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "en"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "142",
+              "length": "17"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "207",
+                "y": "553"
+              },
+              {
+                "x": "207",
+                "y": "580"
+              },
+              {
+                "x": "424",
+                "y": "580"
+              },
+              {
+                "x": "424",
+                "y": "553"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "207",
+                    "y": "553"
+                  },
+                  {
+                    "x": "207",
+                    "y": "580"
+                  },
+                  {
+                    "x": "424",
+                    "y": "580"
+                  },
+                  {
+                    "x": "424",
+                    "y": "553"
+                  }
+                ]
+              },
+              "text": "Марка, модель",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "207",
+                        "y": "561"
+                      },
+                      {
+                        "x": "207",
+                        "y": "583"
+                      },
+                      {
+                        "x": "313",
+                        "y": "583"
+                      },
+                      {
+                        "x": "313",
+                        "y": "561"
+                      }
+                    ]
+                  },
+                  "text": "Марка,",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "160",
+                      "length": "6"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "320",
+                        "y": "558"
+                      },
+                      {
+                        "x": "320",
+                        "y": "583"
+                      },
+                      {
+                        "x": "424",
+                        "y": "583"
+                      },
+                      {
+                        "x": "424",
+                        "y": "558"
+                      }
+                    ]
+                  },
+                  "text": "модель",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "167",
+                      "length": "6"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "160",
+                  "length": "13"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "160",
+              "length": "13"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "208",
+                "y": "592"
+              },
+              {
+                "x": "208",
+                "y": "623"
+              },
+              {
+                "x": "323",
+                "y": "623"
+              },
+              {
+                "x": "323",
+                "y": "592"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "208",
+                    "y": "592"
+                  },
+                  {
+                    "x": "208",
+                    "y": "623"
+                  },
+                  {
+                    "x": "323",
+                    "y": "623"
+                  },
+                  {
+                    "x": "323",
+                    "y": "592"
+                  }
+                ]
+              },
+              "text": "Тип ТС",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "208",
+                        "y": "591"
+                      },
+                      {
+                        "x": "208",
+                        "y": "617"
+                      },
+                      {
+                        "x": "272",
+                        "y": "617"
+                      },
+                      {
+                        "x": "272",
+                        "y": "591"
+                      }
+                    ]
+                  },
+                  "text": "Тип",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "174",
+                      "length": "3"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "279",
+                        "y": "597"
+                      },
+                      {
+                        "x": "279",
+                        "y": "620"
+                      },
+                      {
+                        "x": "323",
+                        "y": "620"
+                      },
+                      {
+                        "x": "323",
+                        "y": "597"
+                      }
+                    ]
+                  },
+                  "text": "ТС",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "178",
+                      "length": "2"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "174",
+                  "length": "6"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "sah"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "174",
+              "length": "6"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "337",
+                "y": "553"
+              },
+              {
+                "x": "337",
+                "y": "682"
+              },
+              {
+                "x": "762",
+                "y": "682"
+              },
+              {
+                "x": "762",
+                "y": "553"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "433",
+                    "y": "553"
+                  },
+                  {
+                    "x": "433",
+                    "y": "580"
+                  },
+                  {
+                    "x": "762",
+                    "y": "580"
+                  },
+                  {
+                    "x": "762",
+                    "y": "553"
+                  }
+                ]
+              },
+              "text": "ЛАДА 217230 ЛАДА ПРИОРА",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "433",
+                        "y": "555"
+                      },
+                      {
+                        "x": "433",
+                        "y": "579"
+                      },
+                      {
+                        "x": "501",
+                        "y": "579"
+                      },
+                      {
+                        "x": "501",
+                        "y": "555"
+                      }
+                    ]
+                  },
+                  "text": "ЛАДА",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "181",
+                      "length": "4"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "506",
+                        "y": "553"
+                      },
+                      {
+                        "x": "506",
+                        "y": "576"
+                      },
+                      {
+                        "x": "582",
+                        "y": "576"
+                      },
+                      {
+                        "x": "582",
+                        "y": "553"
+                      }
+                    ]
+                  },
+                  "text": "217230",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "186",
+                      "length": "6"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "587",
+                        "y": "551"
+                      },
+                      {
+                        "x": "587",
+                        "y": "574"
+                      },
+                      {
+                        "x": "650",
+                        "y": "574"
+                      },
+                      {
+                        "x": "650",
+                        "y": "551"
+                      }
+                    ]
+                  },
+                  "text": "ЛАДА",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "193",
+                      "length": "4"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "655",
+                        "y": "551"
+                      },
+                      {
+                        "x": "655",
+                        "y": "572"
+                      },
+                      {
+                        "x": "762",
+                        "y": "572"
+                      },
+                      {
+                        "x": "762",
+                        "y": "551"
+                      }
+                    ]
+                  },
+                  "text": "ПРИОРА",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "198",
+                      "length": "6"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "181",
+                  "length": "23"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            },
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "435",
+                    "y": "577"
+                  },
+                  {
+                    "x": "435",
+                    "y": "596"
+                  },
+                  {
+                    "x": "750",
+                    "y": "596"
+                  },
+                  {
+                    "x": "750",
+                    "y": "577"
+                  }
+                ]
+              },
+              "text": "LADA 217230 LADA PRÍORA",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "435",
+                        "y": "578"
+                      },
+                      {
+                        "x": "435",
+                        "y": "599"
+                      },
+                      {
+                        "x": "499",
+                        "y": "599"
+                      },
+                      {
+                        "x": "499",
+                        "y": "578"
+                      }
+                    ]
+                  },
+                  "text": "LADA",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "205",
+                      "length": "4"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "504",
+                        "y": "577"
+                      },
+                      {
+                        "x": "504",
+                        "y": "598"
+                      },
+                      {
+                        "x": "580",
+                        "y": "598"
+                      },
+                      {
+                        "x": "580",
+                        "y": "577"
+                      }
+                    ]
+                  },
+                  "text": "217230",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "210",
+                      "length": "6"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "585",
+                        "y": "576"
+                      },
+                      {
+                        "x": "585",
+                        "y": "597"
+                      },
+                      {
+                        "x": "646",
+                        "y": "597"
+                      },
+                      {
+                        "x": "646",
+                        "y": "576"
+                      }
+                    ]
+                  },
+                  "text": "LADA",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "217",
+                      "length": "4"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "651",
+                        "y": "575"
+                      },
+                      {
+                        "x": "651",
+                        "y": "596"
+                      },
+                      {
+                        "x": "750",
+                        "y": "596"
+                      },
+                      {
+                        "x": "750",
+                        "y": "575"
+                      }
+                    ]
+                  },
+                  "text": "PRÍORA",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "222",
+                      "length": "6"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "205",
+                  "length": "23"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            },
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "337",
+                    "y": "592"
+                  },
+                  {
+                    "x": "337",
+                    "y": "623"
+                  },
+                  {
+                    "x": "667",
+                    "y": "623"
+                  },
+                  {
+                    "x": "667",
+                    "y": "592"
+                  }
+                ]
+              },
+              "text": "Легковой комби (хэтчбек)",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "337",
+                        "y": "600"
+                      },
+                      {
+                        "x": "337",
+                        "y": "626"
+                      },
+                      {
+                        "x": "454",
+                        "y": "626"
+                      },
+                      {
+                        "x": "454",
+                        "y": "600"
+                      }
+                    ]
+                  },
+                  "text": "Легковой",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "229",
+                      "length": "8"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "459",
+                        "y": "605"
+                      },
+                      {
+                        "x": "459",
+                        "y": "626"
+                      },
+                      {
+                        "x": "538",
+                        "y": "626"
+                      },
+                      {
+                        "x": "538",
+                        "y": "605"
+                      }
+                    ]
+                  },
+                  "text": "комби",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "238",
+                      "length": "5"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "543",
+                        "y": "601"
+                      },
+                      {
+                        "x": "543",
+                        "y": "626"
+                      },
+                      {
+                        "x": "667",
+                        "y": "626"
+                      },
+                      {
+                        "x": "667",
+                        "y": "601"
+                      }
+                    ]
+                  },
+                  "text": "(хэтчбек)",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "244",
+                      "length": "9"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "229",
+                  "length": "24"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            },
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "666",
+                    "y": "629"
+                  },
+                  {
+                    "x": "666",
+                    "y": "649"
+                  },
+                  {
+                    "x": "752",
+                    "y": "649"
+                  },
+                  {
+                    "x": "752",
+                    "y": "629"
+                  }
+                ]
+              },
+              "text": "В/М1",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "666",
+                        "y": "628"
+                      },
+                      {
+                        "x": "666",
+                        "y": "652"
+                      },
+                      {
+                        "x": "752",
+                        "y": "652"
+                      },
+                      {
+                        "x": "752",
+                        "y": "628"
+                      }
+                    ]
+                  },
+                  "text": "В/М1",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "254",
+                      "length": "4"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "254",
+                  "length": "4"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            },
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "452",
+                    "y": "660"
+                  },
+                  {
+                    "x": "452",
+                    "y": "682"
+                  },
+                  {
+                    "x": "525",
+                    "y": "682"
+                  },
+                  {
+                    "x": "525",
+                    "y": "660"
+                  }
+                ]
+              },
+              "text": "2014",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "452",
+                        "y": "658"
+                      },
+                      {
+                        "x": "452",
+                        "y": "680"
+                      },
+                      {
+                        "x": "525",
+                        "y": "680"
+                      },
+                      {
+                        "x": "525",
+                        "y": "658"
+                      }
+                    ]
+                  },
+                  "text": "2014",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "259",
+                      "length": "4"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "259",
+                  "length": "4"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            },
+            {
+              "languageCode": "pl"
+            },
+            {
+              "languageCode": "sah"
+            },
+            {
+              "languageCode": "tg"
+            },
+            {
+              "languageCode": "ky"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "181",
+              "length": "82"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "209",
+                "y": "629"
+              },
+              {
+                "x": "209",
+                "y": "649"
+              },
+              {
+                "x": "647",
+                "y": "649"
+              },
+              {
+                "x": "647",
+                "y": "629"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "209",
+                    "y": "629"
+                  },
+                  {
+                    "x": "209",
+                    "y": "649"
+                  },
+                  {
+                    "x": "647",
+                    "y": "649"
+                  },
+                  {
+                    "x": "647",
+                    "y": "629"
+                  }
+                ]
+              },
+              "text": "Категория ТС (ABCD, прицеп)",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "209",
+                        "y": "627"
+                      },
+                      {
+                        "x": "209",
+                        "y": "652"
+                      },
+                      {
+                        "x": "357",
+                        "y": "652"
+                      },
+                      {
+                        "x": "357",
+                        "y": "627"
+                      }
+                    ]
+                  },
+                  "text": "Категория",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "264",
+                      "length": "9"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "365",
+                        "y": "627"
+                      },
+                      {
+                        "x": "365",
+                        "y": "649"
+                      },
+                      {
+                        "x": "409",
+                        "y": "649"
+                      },
+                      {
+                        "x": "409",
+                        "y": "627"
+                      }
+                    ]
+                  },
+                  "text": "ТС",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "274",
+                      "length": "2"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "418",
+                        "y": "626"
+                      },
+                      {
+                        "x": "418",
+                        "y": "648"
+                      },
+                      {
+                        "x": "514",
+                        "y": "648"
+                      },
+                      {
+                        "x": "514",
+                        "y": "626"
+                      }
+                    ]
+                  },
+                  "text": "(ABCD,",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "277",
+                      "length": "6"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "521",
+                        "y": "626"
+                      },
+                      {
+                        "x": "521",
+                        "y": "650"
+                      },
+                      {
+                        "x": "647",
+                        "y": "650"
+                      },
+                      {
+                        "x": "647",
+                        "y": "626"
+                      }
+                    ]
+                  },
+                  "text": "прицеп)",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "284",
+                      "length": "7"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "264",
+                  "length": "27"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "tg"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "264",
+              "length": "27"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "209",
+                "y": "660"
+              },
+              {
+                "x": "209",
+                "y": "682"
+              },
+              {
+                "x": "439",
+                "y": "682"
+              },
+              {
+                "x": "439",
+                "y": "660"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "209",
+                    "y": "660"
+                  },
+                  {
+                    "x": "209",
+                    "y": "682"
+                  },
+                  {
+                    "x": "439",
+                    "y": "682"
+                  },
+                  {
+                    "x": "439",
+                    "y": "660"
+                  }
+                ]
+              },
+              "text": "Год выпуска ТС",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "209",
+                        "y": "662"
+                      },
+                      {
+                        "x": "209",
+                        "y": "685"
+                      },
+                      {
+                        "x": "267",
+                        "y": "685"
+                      },
+                      {
+                        "x": "267",
+                        "y": "662"
+                      }
+                    ]
+                  },
+                  "text": "Год",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "292",
+                      "length": "3"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "274",
+                        "y": "660"
+                      },
+                      {
+                        "x": "274",
+                        "y": "684"
+                      },
+                      {
+                        "x": "385",
+                        "y": "684"
+                      },
+                      {
+                        "x": "385",
+                        "y": "660"
+                      }
+                    ]
+                  },
+                  "text": "выпуска",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "296",
+                      "length": "7"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "392",
+                        "y": "659"
+                      },
+                      {
+                        "x": "392",
+                        "y": "682"
+                      },
+                      {
+                        "x": "439",
+                        "y": "682"
+                      },
+                      {
+                        "x": "439",
+                        "y": "659"
+                      }
+                    ]
+                  },
+                  "text": "ТС",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "304",
+                      "length": "2"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "292",
+                  "length": "14"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ky"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "292",
+              "length": "14"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "210",
+                "y": "696"
+              },
+              {
+                "x": "210",
+                "y": "719"
+              },
+              {
+                "x": "695",
+                "y": "719"
+              },
+              {
+                "x": "695",
+                "y": "696"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "210",
+                    "y": "696"
+                  },
+                  {
+                    "x": "210",
+                    "y": "719"
+                  },
+                  {
+                    "x": "695",
+                    "y": "719"
+                  },
+                  {
+                    "x": "695",
+                    "y": "696"
+                  }
+                ]
+              },
+              "text": "Шасси (рама) № ОТСУТСТВУЕТ",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "210",
+                        "y": "693"
+                      },
+                      {
+                        "x": "210",
+                        "y": "721"
+                      },
+                      {
+                        "x": "307",
+                        "y": "721"
+                      },
+                      {
+                        "x": "307",
+                        "y": "693"
+                      }
+                    ]
+                  },
+                  "text": "Шасси",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "307",
+                      "length": "5"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "314",
+                        "y": "693"
+                      },
+                      {
+                        "x": "314",
+                        "y": "717"
+                      },
+                      {
+                        "x": "404",
+                        "y": "717"
+                      },
+                      {
+                        "x": "404",
+                        "y": "693"
+                      }
+                    ]
+                  },
+                  "text": "(рама)",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "313",
+                      "length": "6"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "411",
+                        "y": "694"
+                      },
+                      {
+                        "x": "411",
+                        "y": "719"
+                      },
+                      {
+                        "x": "449",
+                        "y": "719"
+                      },
+                      {
+                        "x": "449",
+                        "y": "694"
+                      }
+                    ]
+                  },
+                  "text": "№",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "320",
+                      "length": "1"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "462",
+                        "y": "696"
+                      },
+                      {
+                        "x": "462",
+                        "y": "721"
+                      },
+                      {
+                        "x": "695",
+                        "y": "721"
+                      },
+                      {
+                        "x": "695",
+                        "y": "696"
+                      }
+                    ]
+                  },
+                  "text": "ОТСУТСТВУЕТ",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "322",
+                      "length": "11"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "307",
+                  "length": "26"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "307",
+              "length": "26"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "215",
+                "y": "729"
+              },
+              {
+                "x": "215",
+                "y": "747"
+              },
+              {
+                "x": "589",
+                "y": "747"
+              },
+              {
+                "x": "589",
+                "y": "729"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "215",
+                    "y": "729"
+                  },
+                  {
+                    "x": "215",
+                    "y": "747"
+                  },
+                  {
+                    "x": "589",
+                    "y": "747"
+                  },
+                  {
+                    "x": "589",
+                    "y": "729"
+                  }
+                ]
+              },
+              "text": "Кузов (кабина, прицеп) №",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "215",
+                        "y": "729"
+                      },
+                      {
+                        "x": "215",
+                        "y": "750"
+                      },
+                      {
+                        "x": "300",
+                        "y": "750"
+                      },
+                      {
+                        "x": "300",
+                        "y": "729"
+                      }
+                    ]
+                  },
+                  "text": "Кузов",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "334",
+                      "length": "5"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "307",
+                        "y": "728"
+                      },
+                      {
+                        "x": "307",
+                        "y": "749"
+                      },
+                      {
+                        "x": "425",
+                        "y": "749"
+                      },
+                      {
+                        "x": "425",
+                        "y": "728"
+                      }
+                    ]
+                  },
+                  "text": "(кабина,",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "340",
+                      "length": "8"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "430",
+                        "y": "728"
+                      },
+                      {
+                        "x": "430",
+                        "y": "748"
+                      },
+                      {
+                        "x": "543",
+                        "y": "748"
+                      },
+                      {
+                        "x": "543",
+                        "y": "728"
+                      }
+                    ]
+                  },
+                  "text": "прицеп)",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "349",
+                      "length": "7"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "548",
+                        "y": "727"
+                      },
+                      {
+                        "x": "548",
+                        "y": "747"
+                      },
+                      {
+                        "x": "589",
+                        "y": "747"
+                      },
+                      {
+                        "x": "589",
+                        "y": "727"
+                      }
+                    ]
+                  },
+                  "text": "№",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "357",
+                      "length": "1"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "334",
+                  "length": "24"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "334",
+              "length": "24"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "254",
+                "y": "758"
+              },
+              {
+                "x": "254",
+                "y": "776"
+              },
+              {
+                "x": "558",
+                "y": "776"
+              },
+              {
+                "x": "558",
+                "y": "758"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "254",
+                    "y": "758"
+                  },
+                  {
+                    "x": "254",
+                    "y": "776"
+                  },
+                  {
+                    "x": "558",
+                    "y": "776"
+                  },
+                  {
+                    "x": "558",
+                    "y": "758"
+                  }
+                ]
+              },
+              "text": "XTA217230E0256412",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "254",
+                        "y": "755"
+                      },
+                      {
+                        "x": "254",
+                        "y": "779"
+                      },
+                      {
+                        "x": "558",
+                        "y": "779"
+                      },
+                      {
+                        "x": "558",
+                        "y": "755"
+                      }
+                    ]
+                  },
+                  "text": "XTA217230E0256412",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "359",
+                      "length": "17"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "359",
+                  "length": "17"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "en"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "359",
+              "length": "17"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "218",
+                "y": "787"
+              },
+              {
+                "x": "218",
+                "y": "801"
+              },
+              {
+                "x": "291",
+                "y": "801"
+              },
+              {
+                "x": "291",
+                "y": "787"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "218",
+                    "y": "787"
+                  },
+                  {
+                    "x": "218",
+                    "y": "801"
+                  },
+                  {
+                    "x": "291",
+                    "y": "801"
+                  },
+                  {
+                    "x": "291",
+                    "y": "787"
+                  }
+                ]
+              },
+              "text": "Цвет",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "218",
+                        "y": "785"
+                      },
+                      {
+                        "x": "218",
+                        "y": "804"
+                      },
+                      {
+                        "x": "291",
+                        "y": "804"
+                      },
+                      {
+                        "x": "291",
+                        "y": "785"
+                      }
+                    ]
+                  },
+                  "text": "Цвет",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "377",
+                      "length": "4"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "377",
+                  "length": "4"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "377",
+              "length": "4"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "219",
+                "y": "818"
+              },
+              {
+                "x": "219",
+                "y": "858"
+              },
+              {
+                "x": "648",
+                "y": "858"
+              },
+              {
+                "x": "648",
+                "y": "818"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "219",
+                    "y": "818"
+                  },
+                  {
+                    "x": "219",
+                    "y": "858"
+                  },
+                  {
+                    "x": "648",
+                    "y": "858"
+                  },
+                  {
+                    "x": "648",
+                    "y": "818"
+                  }
+                ]
+              },
+              "text": "Мощность двигателя, кВт/л. с.",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "219",
+                        "y": "817"
+                      },
+                      {
+                        "x": "219",
+                        "y": "838"
+                      },
+                      {
+                        "x": "358",
+                        "y": "838"
+                      },
+                      {
+                        "x": "358",
+                        "y": "817"
+                      }
+                    ]
+                  },
+                  "text": "Мощность",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "382",
+                      "length": "8"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "364",
+                        "y": "818"
+                      },
+                      {
+                        "x": "364",
+                        "y": "838"
+                      },
+                      {
+                        "x": "509",
+                        "y": "838"
+                      },
+                      {
+                        "x": "509",
+                        "y": "818"
+                      }
+                    ]
+                  },
+                  "text": "двигателя,",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "391",
+                      "length": "10"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "516",
+                        "y": "818"
+                      },
+                      {
+                        "x": "516",
+                        "y": "842"
+                      },
+                      {
+                        "x": "616",
+                        "y": "842"
+                      },
+                      {
+                        "x": "616",
+                        "y": "818"
+                      }
+                    ]
+                  },
+                  "text": "кВт/л.",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "402",
+                      "length": "6"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "615",
+                        "y": "822"
+                      },
+                      {
+                        "x": "615",
+                        "y": "844"
+                      },
+                      {
+                        "x": "648",
+                        "y": "844"
+                      },
+                      {
+                        "x": "648",
+                        "y": "822"
+                      }
+                    ]
+                  },
+                  "text": "с.",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "409",
+                      "length": "2"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "382",
+                  "length": "29"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "382",
+              "length": "29"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "219",
+                "y": "846"
+              },
+              {
+                "x": "219",
+                "y": "882"
+              },
+              {
+                "x": "506",
+                "y": "882"
+              },
+              {
+                "x": "506",
+                "y": "846"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "219",
+                    "y": "846"
+                  },
+                  {
+                    "x": "219",
+                    "y": "882"
+                  },
+                  {
+                    "x": "506",
+                    "y": "882"
+                  },
+                  {
+                    "x": "506",
+                    "y": "846"
+                  }
+                ]
+              },
+              "text": "Экологический класс",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "219",
+                        "y": "845"
+                      },
+                      {
+                        "x": "219",
+                        "y": "873"
+                      },
+                      {
+                        "x": "417",
+                        "y": "873"
+                      },
+                      {
+                        "x": "417",
+                        "y": "845"
+                      }
+                    ]
+                  },
+                  "text": "Экологический",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "412",
+                      "length": "13"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "422",
+                        "y": "853"
+                      },
+                      {
+                        "x": "422",
+                        "y": "876"
+                      },
+                      {
+                        "x": "506",
+                        "y": "876"
+                      },
+                      {
+                        "x": "506",
+                        "y": "853"
+                      }
+                    ]
+                  },
+                  "text": "класс",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "426",
+                      "length": "5"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "412",
+                  "length": "19"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "412",
+              "length": "19"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "646",
+                "y": "818"
+              },
+              {
+                "x": "646",
+                "y": "858"
+              },
+              {
+                "x": "765",
+                "y": "858"
+              },
+              {
+                "x": "765",
+                "y": "818"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "646",
+                    "y": "818"
+                  },
+                  {
+                    "x": "646",
+                    "y": "858"
+                  },
+                  {
+                    "x": "765",
+                    "y": "858"
+                  },
+                  {
+                    "x": "765",
+                    "y": "818"
+                  }
+                ]
+              },
+              "text": "72/97.9",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "646",
+                        "y": "824"
+                      },
+                      {
+                        "x": "646",
+                        "y": "859"
+                      },
+                      {
+                        "x": "765",
+                        "y": "859"
+                      },
+                      {
+                        "x": "765",
+                        "y": "824"
+                      }
+                    ]
+                  },
+                  "text": "72/97.9",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "432",
+                      "length": "7"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "432",
+                  "length": "7"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "432",
+              "length": "7"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "506",
+                "y": "846"
+              },
+              {
+                "x": "506",
+                "y": "882"
+              },
+              {
+                "x": "703",
+                "y": "882"
+              },
+              {
+                "x": "703",
+                "y": "846"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "506",
+                    "y": "846"
+                  },
+                  {
+                    "x": "506",
+                    "y": "882"
+                  },
+                  {
+                    "x": "703",
+                    "y": "882"
+                  },
+                  {
+                    "x": "703",
+                    "y": "846"
+                  }
+                ]
+              },
+              "text": "ЧЕТВЁРТЫЙ",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "506",
+                        "y": "856"
+                      },
+                      {
+                        "x": "506",
+                        "y": "884"
+                      },
+                      {
+                        "x": "703",
+                        "y": "884"
+                      },
+                      {
+                        "x": "703",
+                        "y": "856"
+                      }
+                    ]
+                  },
+                  "text": "ЧЕТВЁРТЫЙ",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "440",
+                      "length": "9"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "440",
+                  "length": "9"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "440",
+              "length": "9"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "222",
+                "y": "878"
+              },
+              {
+                "x": "222",
+                "y": "918"
+              },
+              {
+                "x": "697",
+                "y": "918"
+              },
+              {
+                "x": "697",
+                "y": "878"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "222",
+                    "y": "878"
+                  },
+                  {
+                    "x": "222",
+                    "y": "918"
+                  },
+                  {
+                    "x": "697",
+                    "y": "918"
+                  },
+                  {
+                    "x": "697",
+                    "y": "878"
+                  }
+                ]
+              },
+              "text": "Технически допустимая шах масса, кг",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "222",
+                        "y": "877"
+                      },
+                      {
+                        "x": "222",
+                        "y": "902"
+                      },
+                      {
+                        "x": "368",
+                        "y": "902"
+                      },
+                      {
+                        "x": "368",
+                        "y": "877"
+                      }
+                    ]
+                  },
+                  "text": "Технически",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "450",
+                      "length": "10"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "373",
+                        "y": "882"
+                      },
+                      {
+                        "x": "373",
+                        "y": "903"
+                      },
+                      {
+                        "x": "516",
+                        "y": "903"
+                      },
+                      {
+                        "x": "516",
+                        "y": "882"
+                      }
+                    ]
+                  },
+                  "text": "допустимая",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "461",
+                      "length": "10"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "520",
+                        "y": "883"
+                      },
+                      {
+                        "x": "520",
+                        "y": "904"
+                      },
+                      {
+                        "x": "572",
+                        "y": "904"
+                      },
+                      {
+                        "x": "572",
+                        "y": "883"
+                      }
+                    ]
+                  },
+                  "text": "шах",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "472",
+                      "length": "3"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "578",
+                        "y": "884"
+                      },
+                      {
+                        "x": "578",
+                        "y": "907"
+                      },
+                      {
+                        "x": "657",
+                        "y": "907"
+                      },
+                      {
+                        "x": "657",
+                        "y": "884"
+                      }
+                    ]
+                  },
+                  "text": "масса,",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "476",
+                      "length": "6"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "662",
+                        "y": "888"
+                      },
+                      {
+                        "x": "662",
+                        "y": "910"
+                      },
+                      {
+                        "x": "697",
+                        "y": "910"
+                      },
+                      {
+                        "x": "697",
+                        "y": "888"
+                      }
+                    ]
+                  },
+                  "text": "кг",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "483",
+                      "length": "2"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "450",
+                  "length": "35"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "450",
+              "length": "35"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "225",
+                "y": "909"
+              },
+              {
+                "x": "225",
+                "y": "948"
+              },
+              {
+                "x": "704",
+                "y": "948"
+              },
+              {
+                "x": "704",
+                "y": "909"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "225",
+                    "y": "909"
+                  },
+                  {
+                    "x": "225",
+                    "y": "948"
+                  },
+                  {
+                    "x": "704",
+                    "y": "948"
+                  },
+                  {
+                    "x": "704",
+                    "y": "909"
+                  }
+                ]
+              },
+              "text": "Масса в снаряженном состоянии, кг.",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "225",
+                        "y": "908"
+                      },
+                      {
+                        "x": "225",
+                        "y": "932"
+                      },
+                      {
+                        "x": "308",
+                        "y": "932"
+                      },
+                      {
+                        "x": "308",
+                        "y": "908"
+                      }
+                    ]
+                  },
+                  "text": "Масса",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "486",
+                      "length": "5"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "313",
+                        "y": "913"
+                      },
+                      {
+                        "x": "313",
+                        "y": "932"
+                      },
+                      {
+                        "x": "328",
+                        "y": "932"
+                      },
+                      {
+                        "x": "328",
+                        "y": "913"
+                      }
+                    ]
+                  },
+                  "text": "в",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "492",
+                      "length": "1"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "333",
+                        "y": "913"
+                      },
+                      {
+                        "x": "333",
+                        "y": "934"
+                      },
+                      {
+                        "x": "507",
+                        "y": "934"
+                      },
+                      {
+                        "x": "507",
+                        "y": "913"
+                      }
+                    ]
+                  },
+                  "text": "снаряженном",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "494",
+                      "length": "11"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "513",
+                        "y": "915"
+                      },
+                      {
+                        "x": "513",
+                        "y": "938"
+                      },
+                      {
+                        "x": "653",
+                        "y": "938"
+                      },
+                      {
+                        "x": "653",
+                        "y": "915"
+                      }
+                    ]
+                  },
+                  "text": "состоянии,",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "506",
+                      "length": "10"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "658",
+                        "y": "919"
+                      },
+                      {
+                        "x": "658",
+                        "y": "942"
+                      },
+                      {
+                        "x": "704",
+                        "y": "942"
+                      },
+                      {
+                        "x": "704",
+                        "y": "919"
+                      }
+                    ]
+                  },
+                  "text": "кг.",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "517",
+                      "length": "3"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "486",
+                  "length": "34"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "486",
+              "length": "34"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "689",
+                "y": "878"
+              },
+              {
+                "x": "689",
+                "y": "918"
+              },
+              {
+                "x": "769",
+                "y": "918"
+              },
+              {
+                "x": "769",
+                "y": "878"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "689",
+                    "y": "878"
+                  },
+                  {
+                    "x": "689",
+                    "y": "918"
+                  },
+                  {
+                    "x": "769",
+                    "y": "918"
+                  },
+                  {
+                    "x": "769",
+                    "y": "878"
+                  }
+                ]
+              },
+              "text": "1578",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "689",
+                        "y": "890"
+                      },
+                      {
+                        "x": "689",
+                        "y": "918"
+                      },
+                      {
+                        "x": "769",
+                        "y": "918"
+                      },
+                      {
+                        "x": "769",
+                        "y": "890"
+                      }
+                    ]
+                  },
+                  "text": "1578",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "521",
+                      "length": "4"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "521",
+                  "length": "4"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "521",
+              "length": "4"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "689",
+                "y": "909"
+              },
+              {
+                "x": "689",
+                "y": "948"
+              },
+              {
+                "x": "765",
+                "y": "948"
+              },
+              {
+                "x": "765",
+                "y": "909"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "689",
+                    "y": "909"
+                  },
+                  {
+                    "x": "689",
+                    "y": "948"
+                  },
+                  {
+                    "x": "765",
+                    "y": "948"
+                  },
+                  {
+                    "x": "765",
+                    "y": "909"
+                  }
+                ]
+              },
+              "text": "1163",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "689",
+                        "y": "921"
+                      },
+                      {
+                        "x": "689",
+                        "y": "948"
+                      },
+                      {
+                        "x": "765",
+                        "y": "948"
+                      },
+                      {
+                        "x": "765",
+                        "y": "921"
+                      }
+                    ]
+                  },
+                  "text": "1163",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "526",
+                      "length": "4"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "526",
+                  "length": "4"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "526",
+              "length": "4"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "228",
+                "y": "944"
+              },
+              {
+                "x": "228",
+                "y": "964"
+              },
+              {
+                "x": "612",
+                "y": "964"
+              },
+              {
+                "x": "612",
+                "y": "944"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "228",
+                    "y": "944"
+                  },
+                  {
+                    "x": "228",
+                    "y": "964"
+                  },
+                  {
+                    "x": "612",
+                    "y": "964"
+                  },
+                  {
+                    "x": "612",
+                    "y": "944"
+                  }
+                ]
+              },
+              "text": "Срок временной регистрации",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "228",
+                        "y": "942"
+                      },
+                      {
+                        "x": "228",
+                        "y": "962"
+                      },
+                      {
+                        "x": "294",
+                        "y": "962"
+                      },
+                      {
+                        "x": "294",
+                        "y": "942"
+                      }
+                    ]
+                  },
+                  "text": "Срок",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "531",
+                      "length": "4"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "301",
+                        "y": "944"
+                      },
+                      {
+                        "x": "301",
+                        "y": "965"
+                      },
+                      {
+                        "x": "438",
+                        "y": "965"
+                      },
+                      {
+                        "x": "438",
+                        "y": "944"
+                      }
+                    ]
+                  },
+                  "text": "временной",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "536",
+                      "length": "9"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "445",
+                        "y": "946"
+                      },
+                      {
+                        "x": "445",
+                        "y": "967"
+                      },
+                      {
+                        "x": "612",
+                        "y": "967"
+                      },
+                      {
+                        "x": "612",
+                        "y": "946"
+                      }
+                    ]
+                  },
+                  "text": "регистрации",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "546",
+                      "length": "11"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "531",
+                  "length": "26"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "531",
+              "length": "26"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "231",
+                "y": "1006"
+              },
+              {
+                "x": "231",
+                "y": "1032"
+              },
+              {
+                "x": "492",
+                "y": "1032"
+              },
+              {
+                "x": "492",
+                "y": "1006"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "231",
+                    "y": "1006"
+                  },
+                  {
+                    "x": "231",
+                    "y": "1032"
+                  },
+                  {
+                    "x": "492",
+                    "y": "1032"
+                  },
+                  {
+                    "x": "492",
+                    "y": "1006"
+                  }
+                ]
+              },
+              "text": "ПТС: 63HX263401",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "231",
+                        "y": "1003"
+                      },
+                      {
+                        "x": "231",
+                        "y": "1030"
+                      },
+                      {
+                        "x": "306",
+                        "y": "1030"
+                      },
+                      {
+                        "x": "306",
+                        "y": "1003"
+                      }
+                    ]
+                  },
+                  "text": "ПТС:",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "558",
+                      "length": "4"
+                    }
+                  ]
+                },
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "314",
+                        "y": "1006"
+                      },
+                      {
+                        "x": "314",
+                        "y": "1035"
+                      },
+                      {
+                        "x": "492",
+                        "y": "1035"
+                      },
+                      {
+                        "x": "492",
+                        "y": "1006"
+                      }
+                    ]
+                  },
+                  "text": "63HX263401",
+                  "entityIndex": "-1",
+                  "textSegments": [
+                    {
+                      "startIndex": "563",
+                      "length": "10"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "558",
+                  "length": "15"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "558",
+              "length": "15"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        },
+        {
+          "boundingBox": {
+            "vertices": [
+              {
+                "x": "345",
+                "y": "1059"
+              },
+              {
+                "x": "345",
+                "y": "1088"
+              },
+              {
+                "x": "618",
+                "y": "1088"
+              },
+              {
+                "x": "618",
+                "y": "1059"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "boundingBox": {
+                "vertices": [
+                  {
+                    "x": "345",
+                    "y": "1059"
+                  },
+                  {
+                    "x": "345",
+                    "y": "1088"
+                  },
+                  {
+                    "x": "618",
+                    "y": "1088"
+                  },
+                  {
+                    "x": "618",
+                    "y": "1059"
+                  }
+                ]
+              },
+              "text": "99 27 504481 ",
+              "words": [
+                {
+                  "boundingBox": {
+                    "vertices": [
+                      {
+                        "x": "345",
+                        "y": "1056"
+                      },
+                      {
+                        "x": "345",
+                        "y": "1092"
+                      },
+                      {
+                        "x": "618",
+                        "y": "1092"
+                      },
+                      {
+                        "x": "618",
+                        "y": "1056"
+                      }
+                    ]
+                  },
+                  "text": "99 27 504481 ",
+                  "entityIndex": "0",
+                  "textSegments": [
+                    {
+                      "startIndex": "574",
+                      "length": "13"
+                    }
+                  ]
+                }
+              ],
+              "textSegments": [
+                {
+                  "startIndex": "574",
+                  "length": "13"
+                }
+              ],
+              "orientation": "ANGLE_0"
+            }
+          ],
+          "languages": [
+            {
+              "languageCode": "ru"
+            }
+          ],
+          "textSegments": [
+            {
+              "startIndex": "574",
+              "length": "13"
+            }
+          ],
+          "layoutType": "LAYOUT_TYPE_TEXT"
+        }
+      ],
+      "entities": [
+        {
+          "name": "phone",
+          "text": "99 27 504481"
+        }
+      ],
+      "tables": [],
+      "fullText": "РОССИЙСКАЯ ФЕДЕРАЦИЯ\nСВИДЕТЕЛЬСТВО О РЕГИСТРАЦИИ ТС\nCERTIFICAT D’IMMATRICULATION\nРегистрационный знак\nК787ЕТ136\nИдентификационный номер (VIN)\nXTA\n17230E0256412\nМарка, модель\nТип ТС\nЛАДА 217230 ЛАДА ПРИОРА\nLADA 217230 LADA PRÍORA\nЛегковой комби (хэтчбек)\nВ/М1\n2014\nКатегория ТС (ABCD, прицеп)\nГод выпуска ТС\nШасси (рама) № ОТСУТСТВУЕТ\nКузов (кабина, прицеп) №\nXTA217230E0256412\nЦвет\nМощность двигателя, кВт/л. с.\nЭкологический класс\n72/97.9\nЧЕТВЁРТЫЙ\nТехнически допустимая шах масса, кг\nМасса в снаряженном состоянии, кг.\n1578\n1163\nСрок временной регистрации\nПТС: 63HX263401\n99 27 504481 \n",
+      "rotate": "ANGLE_0",
+      "markdown": "",
+      "pictures": []
+    }
+  }
+}

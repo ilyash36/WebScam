@@ -135,31 +135,21 @@ class BookingView(View):
                 vin = (
                     vin.replace(' ', '')[:17] if vin else None
                 ) or None
-                license_plate = (
-                    form.cleaned_data.get('vehicle_license_plate')
-                    or None
-                )
-                color = (
-                    form.cleaned_data.get('vehicle_color') or None
-                )
 
                 defaults = {
                     'brand': form.cleaned_data['vehicle_brand'],
                     'model': form.cleaned_data['vehicle_model'],
                     'year': form.cleaned_data.get('vehicle_year'),
-                    'vin': vin,
-                    'color': color,
                 }
                 vehicle, v_created = Vehicle.objects.get_or_create(
                     client=client,
-                    license_plate=license_plate,
+                    vin=vin,
                     defaults=defaults,
                 )
                 if not v_created:
                     for attr, val in defaults.items():
                         if val is not None:
                             setattr(vehicle, attr, val)
-                    vehicle.license_plate = license_plate
                     vehicle.save()
 
                 # Заявка
@@ -191,8 +181,17 @@ class BookingView(View):
                 )
 
                 # Отправляем email подтверждения
-                send_verification_email(client, request=request)
-
+                sent_ok = send_verification_email(
+                    client, request=request,
+                )
+                if not sent_ok:
+                    messages.warning(
+                        request,
+                        'Заявка принята, но письмо с подтверждением '
+                        'не удалось отправить. Проверьте папку «Спам», '
+                        'либо настройки почты на сервере. '
+                        'Вы можете связаться с нами по телефону на сайте.',
+                    )
                 return redirect('website:booking_pending')
 
             except Exception as e:
@@ -258,16 +257,25 @@ def check_conflicts_view(request):
                     'email': email,
                 }})
             else:
-                send_verification_email(
+                sent_ok = send_verification_email(
                     existing, request=request,
                 )
+                if sent_ok:
+                    msg = (
+                        'На этот email повторно отправлена '
+                        'ссылка подтверждения. Проверьте почту и «Спам».'
+                    )
+                else:
+                    msg = (
+                        'Не удалось отправить письмо. '
+                        'Проверьте настройки SMTP на сервере '
+                        'или обратитесь к администратору сайта.'
+                    )
                 return JsonResponse({'conflict': {
                     'type': 'email_unverified',
-                    'message': (
-                        'На этот email уже отправлена '
-                        'ссылка подтверждения. Проверьте почту.'
-                    ),
+                    'message': msg,
                     'show_code_input': False,
+                    'email_send_failed': not sent_ok,
                 }})
 
     # --- Проверка VIN ---

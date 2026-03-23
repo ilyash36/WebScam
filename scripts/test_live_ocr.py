@@ -55,8 +55,6 @@ def main() -> None:
             ("vehicle_year", "Год"),
             ("vehicle_brand", "Марка"),
             ("vehicle_model", "Модель"),
-            ("vehicle_license_plate", "Госномер"),
-            ("vehicle_color", "Цвет"),
             ("vehicle_engine_power", "Мощность л.с."),
             ("vehicle_passport_number", "ПТС"),
             ("certificate_series_number", "Серия/№ СТС"),

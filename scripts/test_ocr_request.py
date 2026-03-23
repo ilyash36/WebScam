@@ -15,13 +15,11 @@ BOOKING_URL = "http://127.0.0.1:8000/booking/"
 MOCK_OCR_RESULT = {
     "vehicle_vin": "XW8AB2CD1KA123456",
     "vehicle_year": "2019",
-    "vehicle_license_plate": "А123BC77",
-    "vehicle_color": "Белый",
     "vehicle_passport_number": "77 МУ 654321",
     "certificate_series_number": "77 66 555555",
     "vehicle_brand": "Volkswagen",
     "vehicle_model": "Polo",
-    "vehicle_engine_volume": "1598",
+    "vehicle_engine_volume": "1,6",
     "vehicle_engine_power": "110",
 }
 

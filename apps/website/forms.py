@@ -31,49 +31,37 @@ class BookingForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': 'Vesta, Camry, Logan...'}),
     )
     vehicle_year = forms.IntegerField(
-        label="Год выпуска*",
+        label="Год выпуска",
         required=True,
         min_value=1900,
         widget=forms.NumberInput(attrs={'placeholder': '2010'}),
     )
     vehicle_vin = forms.CharField(
         max_length=17,
-        label="VIN*",
+        label="VIN",
         required=True,
         widget=forms.TextInput(attrs={'placeholder': '17 символов'}),
     )
-    vehicle_license_plate = forms.CharField(
-        max_length=20,
-        label="Госномер",
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'А123BC77'}),
-    )
-    vehicle_color = forms.CharField(
-        max_length=50,
-        label="Цвет",
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Белый, Синий, Серый...'}),
-    )
     vehicle_passport_number = forms.CharField(
         max_length=30,
-        label="Паспорт ТС №*",
+        label="Паспорт ТС №",
         required=True,
         widget=forms.TextInput(attrs={'placeholder': '77 XX 654321'}),
     )
     vehicle_engine_volume = forms.CharField(
-        max_length=6,
-        label="Объём двигателя, куб.см",
-        required=False,
+        max_length=12,
+        label="Объём двигателя, л",
+        required=True,
         widget=forms.TextInput(attrs={
-            'inputmode': 'numeric',
-            'pattern': '[0-9]*',
+            'placeholder': 'например, 1,4 или 2',
+            'inputmode': 'decimal',
         }),
     )
     vehicle_engine_power = forms.CharField(
         max_length=30,
-        label="Мощность двигателя, л.с.*",
+        label="Мощность двигателя, л.с.",
         required=True,
-        widget=forms.TextInput(),
+        widget=forms.TextInput(attrs={'placeholder': 'например, 105'}),
     )
 
     # Сообщение клиента
@@ -128,12 +116,56 @@ class BookingForm(forms.ModelForm):
         ]
 
     def clean_vehicle_engine_volume(self):
-        """Оставляет только цифры (объём в куб.см)."""
+        """
+        Нормализует объём в литрах: запятая или точка, диапазон ~0,5–10 л.
+
+        В БД сохраняется с десятичной запятой («1,4»), как в привычной записи.
+        """
         val = self.cleaned_data.get('vehicle_engine_volume')
-        if not val or not val.strip():
-            return ''
-        digits = re.sub(r'\D', '', val)
-        return digits[:6] if digits else ''
+        if val is None or not str(val).strip():
+            raise forms.ValidationError('Укажите объём двигателя в литрах.')
+        raw = str(val).strip().replace(' ', '').replace(',', '.')
+        if not re.match(r'^\d{1,2}(\.\d{1,2})?$', raw):
+            raise forms.ValidationError(
+                'Укажите объём в литрах, например: 1,4 или 2 (от 0,5 до 10 л).',
+            )
+        try:
+            liters = float(raw)
+        except ValueError:
+            raise forms.ValidationError(
+                'Некорректное значение объёма.',
+            ) from None
+        if not (0.5 <= liters <= 10.0):
+            raise forms.ValidationError(
+                'Объём должен быть в диапазоне от 0,5 до 10 литров.',
+            )
+        if liters == int(liters):
+            disp = str(int(liters))
+        else:
+            disp = f'{liters:.2f}'.rstrip('0').rstrip('.')
+        return disp.replace('.', ',')
+
+    def clean_vehicle_engine_power(self):
+        """Мощность в л.с.: целое или с десятичной частью."""
+        val = self.cleaned_data.get('vehicle_engine_power')
+        if val is None or not str(val).strip():
+            raise forms.ValidationError('Укажите мощность двигателя в л.с.')
+        s = str(val).strip().replace(',', '.').replace(' ', '')
+        if not re.match(r'^\d{1,4}(\.\d{1,2})?$', s):
+            raise forms.ValidationError(
+                'Укажите мощность числом, например: 105 или 97.5.',
+            )
+        try:
+            hp = float(s)
+        except ValueError:
+            raise forms.ValidationError('Некорректное значение мощности.') from None
+        if not (20.0 <= hp <= 2000.0):
+            raise forms.ValidationError(
+                'Проверьте значение мощности (л.с.).',
+            )
+        if abs(hp - round(hp)) < 1e-6:
+            return str(int(round(hp)))
+        return str(hp).replace('.', ',')
 
     def clean_vehicle_passport_number(self):
         """Форматирует ПТС в вид «XX XX YYYYYY»."""

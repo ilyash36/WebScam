@@ -1,6 +1,8 @@
 """
 Настройки для разработки.
 """
+import os
+
 from .base import *
 
 DEBUG = True
@@ -15,8 +17,14 @@ DATABASES = {
     }
 }
 
-# Email backend для разработки
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Почта: по умолчанию письма только в консоль (не в реальный ящик).
+# Для проверки SMTP в .env задайте:
+#   EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+#   EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, DEFAULT_FROM_EMAIL
+EMAIL_BACKEND = os.getenv(
+    'EMAIL_BACKEND',
+    'django.core.mail.backends.console.EmailBackend',
+)
 
 # Отключаем кэширование в разработке
 CACHES = {

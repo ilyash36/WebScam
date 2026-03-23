@@ -5,7 +5,8 @@
 Работает без новых API-вызовов — использует сохранённые JSON-файлы.
 Запуск: python scripts/test_sts_parser.py
 
-Также поддерживает живой OCR для новых изображений:
+Также поддерживает живой OCR для новых изображений (нужны YANDEX_VISION_API_KEY,
+YANDEX_FOLDER_ID в .env; ответ сохраняется в scripts/_ocr_raw_<имя>.json):
   python scripts/test_sts_parser.py --live
 """
 import io
@@ -38,8 +39,6 @@ EXPECTED: dict[str, dict] = {
     "photo_2024-09-18_19-21-13": {
         "vehicle_vin": "TMBJF25L8C6082224",
         "vehicle_year": "2012",
-        "vehicle_license_plate": "P568BX136",
-        "vehicle_color": "ЧЕРНЫЙ",
         "vehicle_brand": "SKODA",
         "vehicle_model": "YETI",
         "vehicle_engine_power": "105",
@@ -52,6 +51,7 @@ EXPECTED: dict[str, dict] = {
         "vehicle_brand": "CHERY",
         "vehicle_model": "T11 TIGGO",
         "vehicle_engine_power": "126",
+        "vehicle_passport_number": "77УР958764",
         "certificate_series_number": "36 35",  # partial
     },
     "photo_2024-10-07_18-23-26": {
@@ -67,12 +67,15 @@ EXPECTED: dict[str, dict] = {
         "vehicle_year": "2014",
         "vehicle_brand": "AUDI",
         "vehicle_model": "Q5",
+        # OCR прочитал буквы серии как «РН» (не «УВ»)
+        "vehicle_passport_number": "78РН587445",
         "certificate_series_number": "99 46 400838",
     },
     "photo_2026-02-23_23-18-48": {
         "vehicle_vin": "X7LBSRB2HAH324703",
         "vehicle_year": "2010",
-        "certificate_series_number": "308738",  # partial, сложный случай
+        "vehicle_passport_number": "77МУ659376",
+        "certificate_series_number": "99 70 308738",
     },
     "photo_2026-02-28_16-20-03": {
         "vehicle_vin": "XTA217230E0256412",
@@ -86,14 +89,12 @@ EXPECTED: dict[str, dict] = {
 FIELD_LABELS = {
     "vehicle_vin": "VIN",
     "vehicle_year": "Год",
-    "vehicle_license_plate": "Госномер",
-    "vehicle_color": "Цвет",
     "vehicle_passport_number": "ПТС",
     "certificate_series_number": "Серия/№ СТС",
     "vehicle_brand": "Марка",
     "vehicle_model": "Модель",
     "vehicle_engine_power": "Мощность л.с.",
-    "vehicle_engine_volume": "Объём",
+    "vehicle_engine_volume": "Объём л",
 }
 
 

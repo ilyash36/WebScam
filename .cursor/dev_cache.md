@@ -2,6 +2,9 @@
 
 > **Назначение**: Сжатая информация для быстрого понимания контекста AI-моделями + кэш истории разработки
 
+> **Канонический порядок чтения** (как в [AI_CONTEXT.md](../AI_CONTEXT.md) §1):  
+> 1) [AI_CONTEXT.md](../AI_CONTEXT.md) — точка входа; 2) [PHILOSOPHY.md](../PHILOSOPHY.md); 3) [CLAUDE.md](../CLAUDE.md); 4) этот файл (детали и хронология); 5) [SETUP.md](../SETUP.md); 6) [DOCKER.md](../DOCKER.md) — по задаче; 7) [.env.example](../.env.example).
+
 ---
 
 ## Быстрый обзор
@@ -10,10 +13,12 @@
 
 **Брендинг**: Chernyavskiy A-Tech. Палитра: чёрный (#0a0a0a), золотой (#d4af37), белый. Шрифты: KOT-Eitai Gothic Bold, Century Old Style Std, Goudy Old Style (Sorts Mill Goudy), DwarvenStonecraftCyrExtended (опционально).
 
-**OCR СТС (2026-03)**: Yandex Vision OCR API + локальный парсер.  
+**OCR СТС (2026-03)**: Yandex Vision OCR API + локальный парсер `sts_parser.py`.  
 - `recognize_document()` → `parse_sts()` — 1–3 сек.  
-- Парсер протестирован на 6 реальных фотографиях СТС, 100% проверок пройдено.  
-- Облачный Workflow (AI Agent) удалён — был медленным (до 2 мин).
+- Парсер: VIN/марка/модель/год, **номер ПТС** (шаблон **2 цифры + 2 буквы + 6 цифр**; опционально **№** между буквами и цифрами, напр. `77 УР№ 958764`; глобальный поиск по `fullText`; `_cert_last_six_digits` — не путать хвост **СТС** с ПТС; `_try_pts_reconstruct_from_eco_glitch` — типичный сбой OCR «экологический класс …659376» + «74» + «Паспорт ТС» → `77МУ…`; `_extract_broken_sts_certificate_tail` — «9 9 / 70… / 308738» → «99 70 308738»), **серия и номер СТС**, **объём** в л или из см³.  
+- Кэш ответов Vision для регрессии: `scripts/_ocr_raw_<имя_файла_фото>.json` — **6** снимков (все `*.jpg` из `Desktop\СТС`); недостающий кэш: `python scripts/test_sts_parser.py --live` (нужны `YANDEX_VISION_API_KEY`, `YANDEX_FOLDER_ID`).  
+- Тест: `python scripts/test_sts_parser.py` — **35** эталонных проверок полей по кэшу (100% при полном наборе JSON).  
+- Облачный Workflow (AI Agent) не используется — был медленным (до 2 мин).
 
 ---
 
@@ -27,7 +32,7 @@
 
 ## Ключевые компоненты
 
-- **apps/core/** - базовые модели (Client, Vehicle, BookingRequest), сервисы (email), утилиты
+- **apps/core/** - базовые модели (Client, Vehicle, BookingRequest), сервисы (email), **`signals.py`** (синхронизация статусов заявок при `is_verified`), утилиты
 - **apps/website/** - публичный сайт (лендинг, формы записи); OCR СТС через Vision API + `ocr/sts_parser.py`
 - **apps/crm/** - CRM функционал (будущее)
 - **apps/api/** - REST API (будущее)
@@ -60,7 +65,8 @@
 - **Админ-панель**: Стилизована под бренд Chernyavskiy A-Tech (`templates/admin/base_site.html`, `static/admin/css/custom.css`); site_header/site_title/index_title в config/urls.py; admin actions «Деактивировать» / «Активировать» клиентов
 - **Навигация**: На странице /estimate/ — кнопка «Главная»; при авторизации — «Личный кабинет» + «Выйти» вместо «Записаться»
 - **Сессии**: `SESSION_COOKIE_AGE = 604800` (7 дней), `SESSION_SAVE_EVERY_REQUEST = True`; `ClientAuthMiddleware` → `request.client`
-- **OCR СТС**: Yandex Vision API + локальный парсер (`yandex_vision.py`, `sts_parser.py`); `YANDEX_VISION_API_KEY` + `YANDEX_FOLDER_ID` — обязательны
+- **Почта**: в **development** по умолчанию `console.EmailBackend` — письма в терминал `runserver`, не в ящик; **`python manage.py mail_selftest`** — проверка backend; **production** — SMTP (`EMAIL_*`, `DEFAULT_FROM_EMAIL`, **`SITE_URL`**). При ошибке SMTP — предупреждение пользователю в форме. Код входа (6 цифр): поле **`Client.auth_code`** в БД; в админке блок «Вход по коду из email». **Заявки**: при подтверждении по ссылке `verify_email_view` статус `pending_confirmation` → `confirmed`; при ручном **`is_verified`** в админке — то же через **`post_save`** (`apps/core/signals.py`). См. `.env.example`, `SETUP.md`
+- **OCR СТС**: Yandex Vision API + локальный парсер (`yandex_vision.py`, `sts_parser.py`); `YANDEX_VISION_API_KEY` + `YANDEX_FOLDER_ID` — обязательны; парсер не извлекает госномер и цвет (поля убраны из формы записи). **Форма записи**: **объём двигателя (л)** и **мощность (л.с.)** — оба обязательны; объём хранится по-человечески в литрах с запятой (`1,4`), не в см³. **ЛК**: в `dashboard.html` в карточке заявки показываются объём (л) и мощность при наличии
 - **Контакты**: Телефон — ссылка на t.me/+79507570606; адрес «Воронеж, Кривошеина 7а» — ссылка на Яндекс.Карты (координаты 51.637890, 39.153217); режим работы Пн-Вс: 10:00–20:00, по предварительной записи; класс `.link-address` для единого стиля
 - **Футер**: «Compose & Code by 1nowen» — ссылка на 1nowen.com; шрифт KOT-Eitai Gothic Bold; «wen» с белым фоном и чёрными буквами; анимация увеличения при наведении; три столбца (Chernyavskiy A-Tech, Контакты, Быстрые ссылки) выровнены по центру страницы через grid (3 колонки, max-width 960px)
 - **Загрузка**: `static/js/loader.js` — анимация 1,5 с при первой загрузке (referrer не с сайта); при навигации внутри сайта — без анимации; inline-скрипт в head для мгновенного skip
@@ -275,7 +281,16 @@ class ClientCreateView(CreateView):
 - **2026-03**: Модель `BookingRequest` (`apps/core/models/booking_request.py`):
   - Статусы: `pending_confirmation`, `confirmed`, `in_progress`, `completed`, `cancelled`
   - Связи: `client` (FK), `vehicle` (FK)
-  - Поля: `message`, `vehicle_passport_number`, `vehicle_engine_volume`, `vehicle_engine_power`, `notes`
+  - Поля: `message`, `vehicle_passport_number`, `vehicle_engine_volume` (**литры**, строка с запятой), `vehicle_engine_power`, `notes`
+  - Миграция **`core.0006_booking_engine_volume_liters`** — `vehicle_engine_volume`: семантика литров, `verbose_name` «Объём двигателя, л»
+- **2026-03**: Парсер СТС/ПТС и форма записи (объём в литрах):
+  - `sts_parser.py`: расширенный поиск **номера ПТС** после метки «Паспорт ТС» (в т.ч. 6 цифр); защита от подстановки того же номера в **серию СТС**; объём: литры или перевод см³ → л для автозаполнения `vehicle_engine_volume`
+  - `BookingForm`: объём и мощность **обязательны**; валидация объёма ~0,5–10 л, мощности ~20–2000 л.с.; нормализация десятичного разделителя (запятая)
+  - `templates/website/booking.html`: убрана подсказка «хотя бы одно из полей»; `dashboard.html` — строка «Объём: … л»
+  - Документация и кэш обновлены (этот файл, CLAUDE.md)
+- **2026-03**: Доработка парсера ПТС/СТС и полный набор кэшей OCR:
+  - `_PTS_RE`: учёт символа **№** между буквами серии и 6 цифрами; `_cert_last_six_digits`; эвристика **eco + 74 + Паспорт ТС**; разбор разбитого номера СТС внизу бланка
+  - Все **6** фото из `Desktop\СТС` имеют `scripts/_ocr_raw_*.json`; `test_sts_parser.py` — **35** проверок по эталону (в т.ч. `photo_2024-10-24_18-06-12`)
 - **2026-03**: Конфликты email/VIN, деактивация аккаунтов, безопасность:
   - `Client.is_active` — мягкая деактивация (только через админ-панель)
   - `Vehicle.vin` — убран `unique=True`; уникальность проверяется только среди активных клиентов в view
@@ -297,10 +312,16 @@ class ClientCreateView(CreateView):
   - `client_context` — передаёт `client` в шаблоны
   - base.html: при `client` — «Личный кабинет» + «Выйти» вместо «Записаться»
   - /booking/: авторизованные видят форму сразу (шлюз скрыт), предзаполнение имени/телефона/email
+- **2026-03**: Почта, ЛК и админка (доработки):
+  - Настройки **`SITE_URL`**, **`DEFAULT_FROM_EMAIL`**, SMTP в `base.py`; `EMAIL_BACKEND` из `.env` в development/production; предупреждение при сбое отправки письма
+  - Команда **`mail_selftest`** — диагностика console/SMTP
+  - **`apps/core/signals.py`**: при сохранении клиента с `is_verified=True` заявки `pending_confirmation` → `confirmed` (в т.ч. ручное подтверждение email в админке)
+  - В админке клиента: поля **`auth_code`**, **`auth_code_created_at`** (readonly); **`.conflict-message`** в CSS — тёмный текст на светлом фоне (читаемость)
 
 ---
 
 ## Ссылки
 
-- [CLAUDE.md](../CLAUDE.md) - Полная техническая документация
-- [PHILOSOPHY.md](../PHILOSOPHY.md) - Философия проекта
+- [AI_CONTEXT.md](../AI_CONTEXT.md) — **точка входа для AI**; §1 — **канонический порядок чтения** (дублируется в README, CLAUDE, CONTRIBUTING, SETUP, DOCKER)
+- [CLAUDE.md](../CLAUDE.md) — полная техническая документация
+- [PHILOSOPHY.md](../PHILOSOPHY.md) — философия проекта
